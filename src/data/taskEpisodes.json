@@ -1,0 +1,1330 @@
+[
+ {
+  "id": "arrange_fruits",
+  "label": "Arrange Fruits",
+  "platform": "yam",
+  "instruction": "Arrange the fruits so that finally there are only banana and cucumber in the left bowl.",
+  "fps": 30,
+  "video": "/videos/episodes/arrange_fruits.mp4",
+  "figure": "/figures/tasks/arrange_fruits.webp",
+  "blocks": [
+   [
+    {
+     "text": "for item in robot.scan('left bowl'):",
+     "executed": true
+    },
+    {
+     "text": "    if item not in ('banana', 'cucumber'):",
+     "executed": true
+    },
+    {
+     "text": "        # intruder: move it out of the left bowl to the right side",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "        approach_best_grasp(robot, item, 'either', [0.0, 0.0, -0.05])",
+     "executed": true
+    },
+    {
+     "text": "        robot.close_gripper('auto')",
+     "executed": true
+    },
+    {
+     "text": "        relocate_object(robot, item, 'right side')",
+     "executed": true
+    },
+    {
+     "text": "        robot.open_gripper('auto')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "if 'banana' not in robot.scan('left bowl'):",
+     "executed": true
+    },
+    {
+     "text": "    # bring the banana in from the right",
+     "executed": true
+    },
+    {
+     "text": "    approach_best_grasp(robot, 'banana', 'either', [0.0, 0.0, -0.05])",
+     "executed": true
+    },
+    {
+     "text": "    robot.close_gripper('auto')",
+     "executed": true
+    },
+    {
+     "text": "    lower_onto_target(robot, 'banana', 'left bowl')",
+     "executed": true
+    },
+    {
+     "text": "    robot.open_gripper('auto')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "if 'cucumber' not in robot.scan('left bowl'):",
+     "executed": true
+    },
+    {
+     "text": "    # bring the cucumber in from the right",
+     "executed": true
+    },
+    {
+     "text": "    approach_best_grasp(robot, 'cucumber', 'either', [0.0, 0.0, -0.05])",
+     "executed": true
+    },
+    {
+     "text": "    robot.close_gripper('auto')",
+     "executed": true
+    },
+    {
+     "text": "    lower_onto_target(robot, 'cucumber', 'left bowl')",
+     "executed": true
+    },
+    {
+     "text": "    robot.open_gripper('auto')",
+     "executed": true
+    }
+   ]
+  ],
+  "segments": [
+   {
+    "start": 0,
+    "end": 14,
+    "block": 0
+   },
+   {
+    "start": 15,
+    "end": 169,
+    "block": 1,
+    "label": "pass 1 (orange)"
+   },
+   {
+    "start": 170,
+    "end": 267,
+    "block": 1,
+    "label": "pass 2 (grapes)"
+   },
+   {
+    "start": 268,
+    "end": 454,
+    "block": 2
+   },
+   {
+    "start": 455,
+    "end": 844,
+    "block": 3
+   }
+  ]
+ },
+ {
+  "id": "pack_backpack",
+  "label": "Pack Backpack",
+  "platform": "yam",
+  "instruction": "Pack the backpack.",
+  "fps": 30,
+  "video": "/videos/episodes/pack_backpack.mp4",
+  "figure": "/figures/tasks/pack_backpack.webp",
+  "blocks": [
+   [
+    {
+     "text": "# STAGE 1/5 -- OPENING, left arm: grasp the zipper pull at the LEFT end.",
+     "executed": true
+    },
+    {
+     "text": "# Lift the pull UP first so it does not snag, then slide it LEFT -> MIDDLE.",
+     "executed": true
+    },
+    {
+     "text": "approach_best_grasp(robot, 'zipper pull', 'left', [0.0, 0.0, 0.05])",
+     "executed": true
+    },
+    {
+     "text": "robot.close_gripper('left')",
+     "executed": true
+    },
+    {
+     "text": "run_zipper_along_seam(robot, 'left', 'left end', 'middle')  # OPENING, first half",
+     "executed": true
+    },
+    {
+     "text": "robot.open_gripper('left')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# STAGE 2/5 -- OPENING, right arm: grasp the pull at the MIDDLE of the seam.",
+     "executed": true
+    },
+    {
+     "text": "# Lift UP, then slide MIDDLE -> RIGHT; after this the backpack is fully OPEN.",
+     "executed": true
+    },
+    {
+     "text": "approach_best_grasp(robot, 'zipper pull', 'right', [0.0, 0.0, 0.05])",
+     "executed": true
+    },
+    {
+     "text": "robot.close_gripper('right')",
+     "executed": true
+    },
+    {
+     "text": "run_zipper_along_seam(robot, 'right', 'middle', 'right end')  # OPENING, second half",
+     "executed": true
+    },
+    {
+     "text": "robot.open_gripper('right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# STAGE 3/5 -- PACK: the backpack is OPEN; put each item in.",
+     "executed": true
+    },
+    {
+     "text": "approach_best_grasp(robot, item, 'either', [0.0, 0.0, -0.05])",
+     "executed": true
+    },
+    {
+     "text": "robot.close_gripper('auto')",
+     "executed": true
+    },
+    {
+     "text": "lower_onto_target(robot, item, 'open backpack')",
+     "executed": true
+    },
+    {
+     "text": "robot.open_gripper('auto')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# STAGE 4/5 -- CLOSING, right arm: everything is packed; grasp the pull at the RIGHT end.",
+     "executed": true
+    },
+    {
+     "text": "# Slide it RIGHT -> MIDDLE to start closing the backpack.",
+     "executed": true
+    },
+    {
+     "text": "approach_best_grasp(robot, 'zipper pull', 'right', [0.0, 0.0, 0.05])",
+     "executed": true
+    },
+    {
+     "text": "robot.close_gripper('right')",
+     "executed": true
+    },
+    {
+     "text": "run_zipper_along_seam(robot, 'right', 'right end', 'middle')  # CLOSING, first half",
+     "executed": true
+    },
+    {
+     "text": "robot.open_gripper('right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# STAGE 5/5 -- CLOSING, left arm: grasp the pull at the MIDDLE.",
+     "executed": true
+    },
+    {
+     "text": "# Slide it MIDDLE -> LEFT; the backpack is now fully CLOSED. Task done.",
+     "executed": true
+    },
+    {
+     "text": "approach_best_grasp(robot, 'zipper pull', 'left', [0.0, 0.0, 0.05])",
+     "executed": true
+    },
+    {
+     "text": "robot.close_gripper('left')",
+     "executed": true
+    },
+    {
+     "text": "run_zipper_along_seam(robot, 'left', 'middle', 'left end')  # CLOSING, second half",
+     "executed": true
+    },
+    {
+     "text": "robot.open_gripper('left')",
+     "executed": true
+    }
+   ]
+  ],
+  "segments": [
+   {
+    "start": 0,
+    "end": 44,
+    "block": 0
+   },
+   {
+    "start": 45,
+    "end": 269,
+    "block": 0
+   },
+   {
+    "start": 270,
+    "end": 439,
+    "block": 1
+   },
+   {
+    "start": 440,
+    "end": 589,
+    "block": 2
+   },
+   {
+    "start": 590,
+    "end": 699,
+    "block": 2
+   },
+   {
+    "start": 700,
+    "end": 849,
+    "block": 3
+   },
+   {
+    "start": 850,
+    "end": 1084,
+    "block": 4
+   }
+  ]
+ },
+ {
+  "id": "replace_lightbulb",
+  "label": "Replace Lightbulb",
+  "platform": "yam",
+  "instruction": "Change the lightbulb if it doesn't work.",
+  "fps": 30,
+  "video": "/videos/episodes/replace_lightbulb.mp4",
+  "figure": "/figures/tasks/replace_lightbulb.webp",
+  "blocks": [
+   [
+    {
+     "text": "# Change the lightbulb if it doesn't work.",
+     "executed": true
+    },
+    {
+     "text": "# STAGE 1 -- TEST: the LEFT arm presses the wall switch; watch the bulb.",
+     "executed": true
+    },
+    {
+     "text": "robot.press('light switch', 'left')",
+     "executed": true
+    },
+    {
+     "text": "if robot.observe('bulb') == 'lit':",
+     "executed": true
+    },
+    {
+     "text": "    robot.go_home()                      # the bulb works; nothing to change",
+     "executed": false
+    },
+    {
+     "text": "else:",
+     "executed": true
+    },
+    {
+     "text": "    # The bulb stayed DARK -- it is broken. Replace it; the switch stays ON,",
+     "executed": true
+    },
+    {
+     "text": "    # so the lamp will light by itself once a working bulb is seated.",
+     "executed": true
+    },
+    {
+     "text": "    # The LEFT arm braces the lamp base the whole time the right arm works:",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "    robot.grasp('lamp base', 'left')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "    # STAGE 2 -- UNSCREW the broken bulb (counter-clockwise), two ratchet bites per call:",
+     "executed": true
+    },
+    {
+     "text": "    while not robot.is_free('old bulb'):",
+     "executed": true
+    },
+    {
+     "text": "        ratchet_twist_off(robot, 'old bulb', 'right', turn_deg=-60)   # UNSCREWING",
+     "executed": true
+    },
+    {
+     "text": "    pull_part_free(robot, 'old bulb', 'right')       # lift it clear of the socket",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "    # STAGE 3 -- DISCARD: carry the broken bulb to the bulb tray and set it down.",
+     "executed": true
+    },
+    {
+     "text": "    relocate_object(robot, 'old bulb', 'bulb tray')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "    # STAGE 4 -- FETCH the NEW bulb: open the idle hand, pick it up.",
+     "executed": true
+    },
+    {
+     "text": "    free_hand_and_pick(robot, 'new bulb', 'right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "    # STAGE 5 -- SEAT and SCREW IN the new bulb (clockwise), two strokes per call:",
+     "executed": true
+    },
+    {
+     "text": "    lower_onto_target(robot, 'new bulb', 'socket')",
+     "executed": true
+    },
+    {
+     "text": "    while not robot.is_seated('new bulb'):",
+     "executed": true
+    },
+    {
+     "text": "        ratchet_turn_fastener(robot, 'new bulb', 'right', turn_deg=+60)  # SCREWING IN",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "    robot.release('left')                # let go of the lamp base",
+     "executed": true
+    },
+    {
+     "text": "    # the lamp LIGHTS -- the switch was on the whole time. Task done.",
+     "executed": true
+    }
+   ]
+  ],
+  "segments": [
+   {
+    "start": 0,
+    "end": 389,
+    "block": 0
+   },
+   {
+    "start": 390,
+    "end": 619,
+    "block": 1
+   },
+   {
+    "start": 620,
+    "end": 1369,
+    "block": 2
+   },
+   {
+    "start": 1370,
+    "end": 1499,
+    "block": 3
+   },
+   {
+    "start": 1500,
+    "end": 1769,
+    "block": 4
+   },
+   {
+    "start": 1770,
+    "end": 2732,
+    "block": 5
+   },
+   {
+    "start": 2733,
+    "end": 2850,
+    "block": 6
+   }
+  ]
+ },
+ {
+  "id": "fold_and_stack_towels",
+  "label": "Fold and Stack Towels",
+  "platform": "yam",
+  "instruction": "Fold the towels and stack them in pink, brown, green order.",
+  "fps": 30,
+  "video": "/videos/episodes/fold_and_stack_towels.mp4",
+  "figure": "/figures/tasks/fold_and_stack_towels.webp",
+  "blocks": [
+   [
+    {
+     "text": "LEFT, RIGHT, BOTH = ['left'], ['right'], ['left', 'right']",
+     "executed": true
+    },
+    {
+     "text": "# the towels start side by side: brown (left), pink (middle), green (right).",
+     "executed": true
+    },
+    {
+     "text": "# fold them in table order -- middle, right, left -- then stack them bottom-to-top",
+     "executed": true
+    },
+    {
+     "text": "# in the order the instruction names.",
+     "executed": true
+    },
+    {
+     "text": "# STAGE 1/6 FOLD PINK | folded: nothing yet | stack: empty | next: fold the green towel",
+     "executed": true
+    },
+    {
+     "text": "for arms, deltas, crease in [",
+     "executed": true
+    },
+    {
+     "text": "        (RIGHT, [[-0.12,0.13,-0.23]], False),                  # 1/4 sweep over the towel",
+     "executed": true
+    },
+    {
+     "text": "        (BOTH, [[0.21,0.05,0.03], [0.18,0.05,0.03]], False),   # 2/4 push to the far side",
+     "executed": true
+    },
+    {
+     "text": "        (RIGHT, [[0.00,0.15,0.04]], False),                    # 3/4 sweep over the towel",
+     "executed": true
+    },
+    {
+     "text": "        (RIGHT, [[0.20,0.07,0.01]], True)]:                    # 4/4 push to the far side",
+     "executed": true
+    },
+    {
+     "text": "    approach_best_grasp(robot, 'pink towel edge', arms[0], [0.0, 0.0, -0.05])",
+     "executed": true
+    },
+    {
+     "text": "    for a in arms:                  robot.grasp('pink towel', a)",
+     "executed": true
+    },
+    {
+     "text": "    for a, d in zip(arms, deltas):  robot.servo_ee_delta(a, d)   # measured travel while gripping",
+     "executed": true
+    },
+    {
+     "text": "    if crease:                      fold_over_and_crease(robot, 'pink towel')",
+     "executed": true
+    },
+    {
+     "text": "    for a in arms:                  robot.release(a)",
+     "executed": true
+    },
+    {
+     "text": "robot.freespace_move_home('right')   # the pink towel is folded; move on",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# STAGE 2/6 FOLD GREEN | folded: pink | stack: empty | next: fold the brown towel",
+     "executed": true
+    },
+    {
+     "text": "for arms, deltas, crease in [",
+     "executed": true
+    },
+    {
+     "text": "        (RIGHT, [[-0.08,0.22,-0.10]], False),                       # 1/4 sweep over the towel",
+     "executed": true
+    },
+    {
+     "text": "        (BOTH, [[0.00,-0.03,-0.04], [-0.02,-0.05,-0.01]], False),   # 2/4 press the fold flat",
+     "executed": true
+    },
+    {
+     "text": "        (BOTH, [[0.15,0.02,0.03], [0.13,-0.03,0.02]], False),       # 3/4 push to the far side",
+     "executed": true
+    },
+    {
+     "text": "        (RIGHT, [[-0.05,0.16,0.04]], True)]:                        # 4/4 sweep over the towel",
+     "executed": true
+    },
+    {
+     "text": "    approach_best_grasp(robot, 'green towel edge', arms[0], [0.0, 0.0, -0.05])",
+     "executed": true
+    },
+    {
+     "text": "    for a in arms:                  robot.grasp('green towel', a)",
+     "executed": true
+    },
+    {
+     "text": "    for a, d in zip(arms, deltas):  robot.servo_ee_delta(a, d)   # measured travel while gripping",
+     "executed": true
+    },
+    {
+     "text": "    if crease:                      fold_over_and_crease(robot, 'green towel')",
+     "executed": true
+    },
+    {
+     "text": "    for a in arms:                  robot.release(a)",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# STAGE 3/6 FOLD BROWN | folded: pink, green | stack: empty | next: stack them: pink, brown, green",
+     "executed": true
+    },
+    {
+     "text": "for arms, deltas, crease in [",
+     "executed": true
+    },
+    {
+     "text": "        (RIGHT, [[0.24,-0.19,0.01]], False),                        # 1/5 push to the far side",
+     "executed": true
+    },
+    {
+     "text": "        (LEFT, [[-0.22,-0.28,-0.24]], False),                       # 2/5 sweep the other way",
+     "executed": true
+    },
+    {
+     "text": "        (BOTH, [[-0.01,-0.03,-0.13], [0.01,-0.03,-0.18]], False),   # 3/5 sweep the other way",
+     "executed": true
+    },
+    {
+     "text": "        (BOTH, [[0.17,0.02,0.01], [0.17,0.02,0.01]], False),        # 4/5 push to the far side",
+     "executed": true
+    },
+    {
+     "text": "        (RIGHT, [[0.00,0.20,0.01]], True)]:                         # 5/5 sweep over the towel",
+     "executed": true
+    },
+    {
+     "text": "    approach_best_grasp(robot, 'brown towel edge', arms[0], [0.0, 0.0, -0.05])",
+     "executed": true
+    },
+    {
+     "text": "    for a in arms:                  robot.grasp('brown towel', a)",
+     "executed": true
+    },
+    {
+     "text": "    for a, d in zip(arms, deltas):  robot.servo_ee_delta(a, d)   # measured travel while gripping",
+     "executed": true
+    },
+    {
+     "text": "    if crease:                      fold_over_and_crease(robot, 'brown towel')",
+     "executed": true
+    },
+    {
+     "text": "    for a in arms:                  robot.release(a)",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# STAGES 4-6/6 STACK | all three folded | pile them bottom-to-top as the instruction names",
+     "executed": true
+    },
+    {
+     "text": "for towel, arm, target_pos in [",
+     "executed": true
+    },
+    {
+     "text": "        ('pink towel', 'right', [0.44, -0.08, 0.77]),     # STAGE 4/6 — pile so far: empty",
+     "executed": true
+    },
+    {
+     "text": "        ('brown towel', 'left', [0.47, -0.04, 0.81]),     # STAGE 5/6 — pile so far: pink",
+     "executed": true
+    },
+    {
+     "text": "        ('green towel', 'right', [0.42, -0.09, 0.79])]:   # STAGE 6/6 — pile so far: pink, brown",
+     "executed": true
+    },
+    {
+     "text": "    robot.freespace_move_to(towel)",
+     "executed": true
+    },
+    {
+     "text": "    approach_best_grasp(robot, towel, arm, [0.0, 0.0, -0.05])",
+     "executed": true
+    },
+    {
+     "text": "    robot.grasp(towel, arm)",
+     "executed": true
+    },
+    {
+     "text": "    robot.servo_ee_delta(arm, [0.0, 0.0, 0.08])   # lift it clear of the table",
+     "executed": true
+    },
+    {
+     "text": "    stack = robot.detect_objects_oneshot('stack')",
+     "executed": true
+    },
+    {
+     "text": "    robot.freespace_move(**{arm + '_target_pos': target_pos,",
+     "executed": true
+    },
+    {
+     "text": "                            arm + '_target_rpy': state.data[arm]['ee_rpy']})",
+     "executed": true
+    },
+    {
+     "text": "    robot.servo_ee_delta(arm, [0.0, 0.0, -0.07])   # lower onto the pile",
+     "executed": true
+    },
+    {
+     "text": "    robot.release(arm)",
+     "executed": true
+    }
+   ]
+  ],
+  "segments": [
+   {
+    "start": 0,
+    "end": 61,
+    "block": 0
+   },
+   {
+    "start": 62,
+    "end": 347,
+    "block": 0
+   },
+   {
+    "start": 348,
+    "end": 983,
+    "block": 0
+   },
+   {
+    "start": 984,
+    "end": 1169,
+    "block": 0
+   },
+   {
+    "start": 1170,
+    "end": 1739,
+    "block": 1
+   },
+   {
+    "start": 1740,
+    "end": 2246,
+    "block": 1
+   },
+   {
+    "start": 2247,
+    "end": 2494,
+    "block": 1
+   },
+   {
+    "start": 2495,
+    "end": 2852,
+    "block": 2
+   },
+   {
+    "start": 2853,
+    "end": 3442,
+    "block": 2
+   },
+   {
+    "start": 3443,
+    "end": 4148,
+    "block": 2
+   },
+   {
+    "start": 4149,
+    "end": 4419,
+    "block": 2
+   },
+   {
+    "start": 4420,
+    "end": 5519,
+    "block": 3
+   },
+   {
+    "start": 5520,
+    "end": 6146,
+    "block": 3
+   },
+   {
+    "start": 6147,
+    "end": 6775,
+    "block": 3
+   }
+  ]
+ },
+ {
+  "id": "arrange_fruits_sharpa",
+  "label": "Arrange Fruits with Tongs",
+  "platform": "sharpa",
+  "instruction": "Arrange the fruits so that there will be only pear in the left bowl.",
+  "fps": 30,
+  "video": "/videos/episodes/arrange_fruits_sharpa.mp4",
+  "figure": "/figures/tasks/arrange_fruits_sharpa.webp",
+  "blocks": [
+   [
+    {
+     "text": "# goal: the left bowl must end up holding only the pear",
+     "executed": true
+    },
+    {
+     "text": "targets = {'pear'}",
+     "executed": true
+    },
+    {
+     "text": "tongs = robot.detect_objects_oneshot('tongs')      # on the stand at the right edge of the table",
+     "executed": true
+    },
+    {
+     "text": "robot.freespace_move('right', [+0.42, -0.44, +0.74])   # measured stand pose",
+     "executed": true
+    },
+    {
+     "text": "robot.grasp_tool('right', 'tongs')                 # the fingers wrap the handle and stay closed",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "bowl = robot.scan('left bowl')                     # sees {'apple'}",
+     "executed": true
+    },
+    {
+     "text": "robot.servo_ee_delta('right', [-0.06, +0.44, +0.00])    # lift the tongs off the stand and travel",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "robot.freespace_move('right', [+0.38, +0.00, +0.72])   # over the apple in the left bowl",
+     "executed": true
+    },
+    {
+     "text": "robot.servo_ee_delta('right', [+0.00, +0.04, -0.02])    # lower the tong tips around it",
+     "executed": true
+    },
+    {
+     "text": "robot.squeeze_tongs('right', 'apple')              # pinch until the apple is held",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "robot.servo_ee_delta('right', [+0.00, -0.12, +0.12])    # lift it over the rim",
+     "executed": true
+    },
+    {
+     "text": "robot.freespace_move('right', [+0.40, -0.18, +0.76])   # across to the tray",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "robot.servo_ee_delta('right', [+0.00, +0.00, +0.00])    # lower it the last few centimetres",
+     "executed": true
+    },
+    {
+     "text": "robot.release_tongs('right')                    # the apple stays in the tray",
+     "executed": true
+    },
+    {
+     "text": "bowl = set()            # next: bring in pear",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "robot.freespace_move('right', [+0.40, -0.26, +0.70])   # over the pear in the tray",
+     "executed": true
+    },
+    {
+     "text": "robot.servo_ee_delta('right', [+0.02, +0.00, -0.06])    # lower the tong tips around it",
+     "executed": true
+    },
+    {
+     "text": "robot.squeeze_tongs('right', 'pear')              # pinch until the pear is held",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "robot.servo_ee_delta('right', [-0.02, +0.02, +0.10])    # lift it over the rim",
+     "executed": true
+    },
+    {
+     "text": "robot.freespace_move('right', [+0.36, -0.06, +0.78])   # across to the left bowl",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "robot.servo_ee_delta('right', [+0.00, +0.00, +0.00])    # lower it the last few centimetres",
+     "executed": true
+    },
+    {
+     "text": "robot.release_tongs('right')                    # the pear stays in the left bowl",
+     "executed": true
+    },
+    {
+     "text": "bowl = {'pear'}            # next: put the tongs back, the bowl is right",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "assert bowl == targets                             # pear in the left bowl",
+     "executed": true
+    },
+    {
+     "text": "robot.freespace_move('right', [+0.36, -0.38, +0.70])   # back over the stand",
+     "executed": true
+    },
+    {
+     "text": "robot.servo_ee_delta('right', [+0.02, -0.32, -0.10])    # measured return travel",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "robot.stow_tool('right', 'tongs')                  # open the hand, leave the tongs on the stand",
+     "executed": true
+    },
+    {
+     "text": "assert bowl == targets                             # done",
+     "executed": true
+    }
+   ]
+  ],
+  "segments": [
+   {
+    "start": 0,
+    "end": 139,
+    "block": 0
+   },
+   {
+    "start": 140,
+    "end": 276,
+    "block": 1
+   },
+   {
+    "start": 277,
+    "end": 317,
+    "block": 2
+   },
+   {
+    "start": 318,
+    "end": 379,
+    "block": 3
+   },
+   {
+    "start": 380,
+    "end": 414,
+    "block": 4
+   },
+   {
+    "start": 415,
+    "end": 550,
+    "block": 5
+   },
+   {
+    "start": 551,
+    "end": 629,
+    "block": 6
+   },
+   {
+    "start": 630,
+    "end": 679,
+    "block": 7
+   },
+   {
+    "start": 680,
+    "end": 751,
+    "block": 8
+   },
+   {
+    "start": 752,
+    "end": 847,
+    "block": 9
+   }
+  ]
+ },
+ {
+  "id": "deal_poker",
+  "label": "Deal Poker",
+  "platform": "sharpa",
+  "instruction": "Pick up the poker with the right hand, transfer it to the left hand, then use the right hand to pull out the first card and insert it into the slot.",
+  "fps": 30,
+  "video": "/videos/episodes/deal_poker.mp4",
+  "figure": "/figures/tasks/deal_poker.webp",
+  "blocks": [
+   [
+    {
+     "text": "# The right hand reaches for and closes on the poker where it sits.",
+     "executed": true
+    },
+    {
+     "text": "robot.grasp('poker', 'right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# Lift the poker clear of the table.",
+     "executed": true
+    },
+    {
+     "text": "robot.move_arm('right', 'up')",
+     "executed": true
+    },
+    {
+     "text": "# Pass the poker from the right hand to the left hand.",
+     "executed": true
+    },
+    {
+     "text": "robot.handover('poker', 'right', 'left')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# The video shows the right hand reaching for and closing on the card in the holder.",
+     "executed": true
+    },
+    {
+     "text": "robot.grasp('card', 'right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# Pull the card up and out of the holder.",
+     "executed": true
+    },
+    {
+     "text": "robot.move_arm('right', 'up')",
+     "executed": true
+    },
+    {
+     "text": "# Bring the card to the poker and seat it into the slot, keeping hold of it.",
+     "executed": true
+    },
+    {
+     "text": "robot.goto_relative('right', 'poker', 'inside')",
+     "executed": true
+    },
+    {
+     "text": "# [auto-repair] gripper events under-emitted by the coder; inserted from the sensor (grounded):",
+     "executed": true
+    },
+    {
+     "text": "robot.close_hand('right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# The right hand grasps the poker where it sits.",
+     "executed": true
+    },
+    {
+     "text": "robot.grasp('poker', 'right')",
+     "executed": true
+    },
+    {
+     "text": "# The right hand closes on the card where it sits in the slot.",
+     "executed": true
+    },
+    {
+     "text": "robot.grasp('card', 'right')",
+     "executed": true
+    },
+    {
+     "text": "# Pull the card out of the poker slot to the right.",
+     "executed": true
+    },
+    {
+     "text": "robot.move_arm('right', 'right')",
+     "executed": true
+    },
+    {
+     "text": "# [auto-repair] gripper events under-emitted by the coder; inserted from the sensor (grounded):",
+     "executed": true
+    },
+    {
+     "text": "robot.open_hand('right')",
+     "executed": true
+    },
+    {
+     "text": "robot.close_hand('right')",
+     "executed": true
+    },
+    {
+     "text": "insert_into_receptacle(robot, 'card', 'poker', 'right', 'right')",
+     "executed": true
+    }
+   ]
+  ],
+  "segments": [
+   {
+    "start": 0,
+    "end": 164,
+    "block": 0
+   },
+   {
+    "start": 165,
+    "end": 244,
+    "block": 1
+   },
+   {
+    "start": 245,
+    "end": 309,
+    "block": 2
+   },
+   {
+    "start": 310,
+    "end": 429,
+    "block": 3
+   },
+   {
+    "start": 430,
+    "end": 499,
+    "block": 4
+   },
+   {
+    "start": 500,
+    "end": 691,
+    "block": 4
+   }
+  ]
+ },
+ {
+  "id": "flip_scoreboard",
+  "label": "Flip Scoreboard",
+  "platform": "sharpa",
+  "instruction": "Add 2 to the scoreboard then press the button.",
+  "fps": 30,
+  "video": "/videos/episodes/flip_scoreboard.mp4",
+  "figure": "/figures/tasks/flip_scoreboard.webp",
+  "blocks": [
+   [
+    {
+     "text": "# add 2 to the scoreboard then press the button",
+     "executed": true
+    },
+    {
+     "text": "current = robot.read_number('scoreboard')   # the board shows 3",
+     "executed": true
+    },
+    {
+     "text": "target = current + 2                        # -> 5: what the board must read before pressing",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "robot.grasp('scoreboard', 'left')   # brace the board while the right hand flips",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "turn_over_object(robot, 'ones-digit card', 'right')   # flip 1/2: 3 -> 4 (1 more to go)",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "turn_over_object(robot, 'ones-digit card', 'right')   # flip 2/2: 4 -> 5 (target reached)",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "robot.release('left')",
+     "executed": true
+    },
+    {
+     "text": "press_onto_target(robot, 'red button', 'right')   # the board reads 5 == target; press to confirm",
+     "executed": true
+    },
+    {
+     "text": "# done: the scoreboard shows 5 and the button has been pressed",
+     "executed": true
+    }
+   ]
+  ],
+  "segments": [
+   {
+    "start": 0,
+    "end": 119,
+    "block": 0
+   },
+   {
+    "start": 120,
+    "end": 229,
+    "block": 1
+   },
+   {
+    "start": 230,
+    "end": 649,
+    "block": 2
+   },
+   {
+    "start": 650,
+    "end": 929,
+    "block": 3
+   },
+   {
+    "start": 930,
+    "end": 1149,
+    "block": 4
+   }
+  ]
+ },
+ {
+  "id": "solve_rubiks_cube",
+  "label": "Solve Rubik's Cube",
+  "platform": "sharpa",
+  "instruction": "Solve the Rubik's cube.",
+  "fps": 60,
+  "video": "/videos/episodes/solve_rubiks_cube.mp4",
+  "figure": "/figures/tasks/solve_rubiks_cube.webp",
+  "blocks": [
+   [
+    {
+     "text": "# both hands move in over the cube, fingers still open",
+     "executed": true
+    },
+    {
+     "text": "cube = robot.detect_objects_oneshot('rubiks cube')",
+     "executed": true
+    },
+    {
+     "text": "reach_toward(robot, 'rubiks cube', 'both')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# the right hand closes on the cube",
+     "executed": true
+    },
+    {
+     "text": "close_hand(robot, 'right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# the right hand holds the cube steady, the other stays clear",
+     "executed": true
+    },
+    {
+     "text": "hold(robot, 'rubiks cube', 'right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# the fingers turn the right layer while the palm holds the rest of the cube still",
+     "executed": true
+    },
+    {
+     "text": "rotate_layer(robot, 'rubiks cube', 'right', 'right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# the fingers turn the top layer while the palm holds the rest of the cube still",
+     "executed": true
+    },
+    {
+     "text": "rotate_layer(robot, 'rubiks cube', 'top', 'right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# both hands close on the cube and the grip passes across",
+     "executed": true
+    },
+    {
+     "text": "handover(robot, 'rubiks cube', 'right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# the right hand holds the cube steady, the other stays clear",
+     "executed": true
+    },
+    {
+     "text": "hold(robot, 'rubiks cube', 'right')",
+     "executed": true
+    }
+   ],
+   [
+    {
+     "text": "# the cube goes back down and the fingers open",
+     "executed": true
+    },
+    {
+     "text": "place(robot, 'rubiks cube', 'right')",
+     "executed": true
+    },
+    {
+     "text": "open_hand(robot, 'right')",
+     "executed": true
+    }
+   ]
+  ],
+  "segments": [
+   {
+    "start": 0,
+    "end": 329,
+    "block": 0
+   },
+   {
+    "start": 330,
+    "end": 344,
+    "block": 1
+   },
+   {
+    "start": 345,
+    "end": 457,
+    "block": 2
+   },
+   {
+    "start": 458,
+    "end": 503,
+    "block": 3
+   },
+   {
+    "start": 504,
+    "end": 592,
+    "block": 4
+   },
+   {
+    "start": 593,
+    "end": 624,
+    "block": 5
+   },
+   {
+    "start": 625,
+    "end": 747,
+    "block": 6
+   },
+   {
+    "start": 748,
+    "end": 933,
+    "block": 7
+   }
+  ]
+ }
+]
