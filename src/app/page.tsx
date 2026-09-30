@@ -1,16 +1,16 @@
 "use client";
 
-import { Code, FileText, List, X } from "lucide-react";
+import { Code, FileText, List, Play, X } from "lucide-react";
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
 import Hero from "@/components/Hero";
+import DemoGallery from "@/components/DemoGallery";
 import ZoomableImage from "@/components/ZoomableImage";
 import JointDenoisingDemo from "@/components/JointDenoisingDemo";
-import TaskEpisodePlayer from "@/components/TaskEpisodePlayer";
 import SkillExplorer from "@/components/SkillExplorer";
 import FailureExplorer from "@/components/FailureExplorer";
 import CitationBibtex from "@/components/CitationBibtex";
-import { AverageBars, GroupedBars, LatencyChart, RoboTwinBars, RoboTwinPerTask, TaskTable } from "@/components/Charts";
+import { AverageBars, GroupedBars, LatencyChart, RoboTwinBars, TaskTable } from "@/components/Charts";
 import {
   ABL_ATTENTION,
   ABL_GENERATION,
@@ -19,8 +19,10 @@ import {
   AFFILIATIONS,
   AUTHOR_NOTES,
   AUTHORS,
+  BIBTEX,
   LINKS,
   LOGOS,
+  OVERVIEW_VIDEO,
   PRETRAIN_STATS,
   REAL_RESULTS,
 } from "@/data/aw0";
@@ -29,22 +31,22 @@ import { asset } from "@/lib/asset";
 const outlineItems: { href: string; label: string; level?: number }[] = [
   { href: "#article-title", label: "Title" },
   { href: "#abstract", label: "Abstract" },
-  { href: "#overview", label: "Overview" },
+  { href: "#contributions", label: "Contributions" },
   { href: "#method", label: "Agentic World Action Model" },
   { href: "#joint-denoising", label: "Joint denoising", level: 2 },
   { href: "#annotation", label: "Agentic code annotation", level: 2 },
   { href: "#skills", label: "Skill library", level: 2 },
   { href: "#training", label: "Training recipe", level: 2 },
+  { href: "#demos", label: "Demonstrations" },
   { href: "#simulation", label: "Simulation: RoboTwin 2.0" },
   { href: "#real-world", label: "Real-world experiments" },
-  { href: "#task-episodes", label: "Tasks and aligned code", level: 2 },
   { href: "#hybrid", label: "Hybrid execution", level: 2 },
   { href: "#ablations", label: "Ablations" },
   { href: "#analysis", label: "What code changes" },
   { href: "#failures", label: "Failure cases" },
   { href: "#limitations", label: "Limitations" },
   { href: "#conclusion", label: "Conclusion" },
-  { href: "#citation", label: "Citation" },
+  ...(BIBTEX ? [{ href: "#citation", label: "Citation" }] : []),
 ];
 
 function Outline({ activeHref }: { activeHref: string }) {
@@ -204,16 +206,16 @@ function ArticleContent() {
             </div>
           </header>
 
-          {/* ---- Teaser ---- */}
+          {/* ---- Overview video (~3 min), placed like T-Rex's full video ---- */}
           <figure className="aw-figure">
-            <ZoomableImage alt="Overview of AW-0" className="fig-img" height={1323} src={asset("/figures/teaser.webp")} width={2800} />
-            <figcaption>
-              Figure 1: <b>Overview of AW-0.</b> AW-0 is an agentic world action model that unifies code-based planning with
-              world action modeling by jointly denoising skill programs, future video, and control trajectories. An agentic
-              pipeline discovers reusable skills and annotates robot and human demonstrations with programs for both
-              pretraining and downstream fine-tuning. The resulting policy achieves strong performance on both
-              parallel-gripper and dexterous-hand tasks.
-            </figcaption>
+            {OVERVIEW_VIDEO ? (
+              <video autoPlay className="fig-img" controls loop muted playsInline preload="metadata" src={asset(OVERVIEW_VIDEO)} />
+            ) : (
+              <div aria-label="Overview video coming soon" className="aw-video-slot" role="img">
+                <Play aria-hidden="true" size={22} strokeWidth={1.8} />
+                <span>Overview video (about 3 minutes) — coming soon</span>
+              </div>
+            )}
           </figure>
 
           {/* ---- Abstract ---- */}
@@ -235,33 +237,29 @@ function ArticleContent() {
             between planning, prediction and execution within WAMs.
           </p>
 
-          {/* ---- Overview ---- */}
-          <h2 id="overview">Overview</h2>
+          {/* ---- Contributions ---- */}
+          <h2 id="contributions">Contributions</h2>
           <p>
-            World action models (WAMs) ground control in a learned model of how the physical world evolves, but predicted
-            video and action chunks do not by themselves say how a long-horizon task should be decomposed: which reusable
-            skills to invoke, how to parameterize them, or how to compose them across subtasks. Agentic robot systems supply
-            exactly that structure through a programmatic harness, yet lack a learned model of how the world will change as
-            the robot acts. AW-0 combines the two: a <span className="xp xp--code">code expert</span> writes the plan as a
-            short program that conditions the <span className="xp xp--video">video</span> and{" "}
-            <span className="xp xp--action">action</span> experts inside the same generative model. Our contributions:
+            AW-0 brings agentic robotic skills into a world action model: generating code improves the model&rsquo;s action
+            prediction, and the code it generates can be reused in an agentic framework.
           </p>
           <ul>
             <li>
-              <strong>A mixture-of-transformers WAM with a code expert</strong> that simultaneously denoises code, future
-              video, and control, so code generation directly improves action prediction.
+              <strong>A mixture-of-transformers WAM with a code expert</strong> — code, future video, and actions are denoised
+              jointly, so the generated program guides both the predicted future and the motor commands.
             </li>
             <li>
-              <strong>An automated agentic pipeline</strong> for program annotation and skill discovery on robot and
-              egocentric human demonstrations.
+              <strong>An automated agentic annotation pipeline</strong> — coding agents label robot and egocentric human
+              demonstrations with aligned programs and distill recurring routines into reusable skills.
             </li>
             <li>
-              <strong>A dataset of structured skill programs</strong>: 2.08M program slices aligned with 2,913 hours of
-              demonstrations, written against a frozen library of 50 reusable skills.
+              <strong>A dataset of structured skill programs</strong> — 2,913 hours of robot and egocentric human
+              demonstrations annotated with aligned programs, written against a frozen library of 50 skills.{" "}
+              <mark className="aw-tbd">(to be determined)</mark>
             </li>
             <li>
-              <strong>A hybrid execution policy</strong> that switches between invoking the generated program and executing
-              the action chunk from the action expert.
+              <strong>A hybrid execution policy</strong> — at every replanning point it either invokes the generated program
+              or executes the action chunk from the action expert.
             </li>
           </ul>
 
@@ -273,22 +271,12 @@ function ArticleContent() {
             <sub>0</sub>, future observations are continuous video latents <i>Z</i>
             <sub>0</sub> from a pretrained VAE, and robot motion is an action chunk <i>A</i>
             <sub>0</sub> over a horizon of <i>H</i> steps. The model is conditioned on the current multi-view observations,
-            the language instruction, the robot state, and a compact memory of the program slices generated so far:
+            the language instruction, the robot state, and a compact memory of the program slices generated so far.
           </p>
-          <div className="aw-eq">
-            𝒞<sub>t</sub> = {"{"}𝒪<sub>t</sub>, <i>L</i>, <i>S</i>
-            <sub>t</sub>, <i>M</i>
-            <sub>t</sub>
-            {"}"},&nbsp;&nbsp;&nbsp; <i>p</i>
-            <sub>θ</sub>(<i>C</i>
-            <sub>0</sub>, <i>Z</i>
-            <sub>0</sub>, <i>A</i>
-            <sub>0</sub> | 𝒞<sub>t</sub>)
-          </div>
           <figure className="aw-figure">
-            <ZoomableImage alt="The AW-0 framework" className="fig-img" height={2240} src={asset("/figures/method.webp")} width={2800} />
+            <ZoomableImage alt="The AW-0 framework" className="fig-img fig-img--pad" height={2240} src={asset("/figures/method.webp")} width={2800} />
             <figcaption>
-              Figure 2: <b>AW-0 framework.</b> A Mixture-of-Transformers backbone with three experts generating code,
+              Figure 1: <b>AW-0 framework.</b> A Mixture-of-Transformers backbone with three experts generating code,
               video, and action, which are denoised jointly: video and action under continuous flow matching, code under
               discrete masked diffusion.
             </figcaption>
@@ -318,7 +306,7 @@ function ArticleContent() {
             pretrained distribution and a uniform one, with importance weights that balance video learning against
             predictive guidance.
           </p>
-          <JointDenoisingDemo figureNumber={3} />
+          <JointDenoisingDemo figureNumber={2} />
 
           <h3 className="article-subsection" id="annotation">
             Agentic code annotation
@@ -334,13 +322,13 @@ function ArticleContent() {
           <figure className="aw-figure">
             <ZoomableImage
               alt="Automatic annotation pipeline"
-              className="fig-img"
+              className="fig-img fig-img--pad"
               height={1597}
               src={asset("/figures/annotation_pipeline.webp")}
               width={2400}
             />
             <figcaption>
-              Figure 4: <b>Automatic annotation pipeline.</b> Coding agents generate subtask-level programs using predefined
+              Figure 3: <b>Automatic annotation pipeline.</b> Coding agents generate subtask-level programs using predefined
               primitive APIs and available skills, while a coordinator distills recurring patterns into a library of
               reusable skills across tasks. With the library frozen, the corpus is annotated by reusing cached code when
               contact and motion evidence match and generating new labels otherwise.
@@ -363,9 +351,9 @@ function ArticleContent() {
           <p>
             The pipeline produced a frozen library of <strong>50 skills</strong>: 23 for YAM robot data and 27 for egocentric
             human data. Each skill is a Python function over the primitive API that takes the objects it acts on as
-            arguments, so a routine that recurs across hundreds of tasks is written once and invoked by name.
+            arguments. 10 representative skills are shown here.
           </p>
-          <SkillExplorer figureNumber={5} />
+          <SkillExplorer figureNumber={4} />
 
           <h3 className="article-subsection" id="training">
             Training recipe
@@ -385,6 +373,15 @@ function ArticleContent() {
             ))}
           </div>
 
+          {/* ---- Demonstrations ---- */}
+          <h2 id="demos">Demonstrations</h2>
+          <p>
+            Real-world AW-0 rollouts on the eight tasks, on the YAM station (parallel grippers) and the Tianji–Sharpa
+            platform (dexterous hands). Pick a task to watch the policy execute it; use the full-screen button to expand
+            the video.
+          </p>
+          <DemoGallery />
+
           {/* ---- Simulation ---- */}
           <h2 id="simulation">Simulation: RoboTwin 2.0</h2>
           <p>
@@ -394,8 +391,7 @@ function ArticleContent() {
             demonstrations per task (2,500 episodes) and are evaluated on the <em>clean</em> setting and on the{" "}
             <em>random</em> setting with randomized backgrounds, textures, lighting, table height, and distractors.
           </p>
-          <RoboTwinBars figureNumber={6} />
-          <RoboTwinPerTask />
+          <RoboTwinBars figureNumber={5} />
           <p>
             AW-0 reaches the highest average success rate, <strong>50.7%</strong>, driven by <strong>80.8%</strong> on the
             clean setting, 16.0 points above the strongest baseline WLA (64.8%). Under visual randomization the default mode
@@ -421,7 +417,7 @@ function ArticleContent() {
               width={2600}
             />
             <figcaption>
-              Figure 7: How code execution and direct actions interleave in hybrid mode. Top, <i>blocks_ranking_rgb</i>: the
+              Figure 6: How code execution and direct actions interleave in hybrid mode. Top, <i>blocks_ranking_rgb</i>: the
               three pick-and-place cycles run almost entirely as code, with direct actions around a stage transition. Bottom,{" "}
               <i>pick_dual_bottles</i>: code localizes a bottle but fails to secure the grasp; direct actions complete the
               grasp, then code resumes. On successful episodes, code drives 14.5% of steps in the clean setting and 35.0% in
@@ -437,30 +433,6 @@ function ArticleContent() {
             two 22-DoF Sharpa dexterous hands. Both observe three RGB views and act in a unified 64-D state–action space.
             Each task is run for 3×16 rollouts under randomized initial object poses and scored with an additive rubric.
           </p>
-          <figure className="aw-figure">
-            <div className="aw-fig-pair">
-              <div className="aw-fig-pair__cell">
-                <ZoomableImage alt="YAM station" className="fig-img" height={1677} src={asset("/figures/hardware_yam.webp")} width={1400} />
-                <p>(a) YAM station</p>
-              </div>
-              <div className="aw-fig-pair__cell">
-                <ZoomableImage
-                  alt="Tianji–Sharpa station"
-                  className="fig-img"
-                  height={1669}
-                  src={asset("/figures/hardware_tianji_sharpa.webp")}
-                  width={1700}
-                />
-                <p>(b) Tianji–Sharpa station</p>
-              </div>
-            </div>
-            <figcaption>
-              Figure 8: <b>Real-world robot setups.</b> (a) The YAM station: two arms with linear grippers, with a RealSense
-              D405 camera overhead and one on each wrist (the bottom camera is not used). (b) The Tianji–Sharpa station: a
-              Tianji torso with two Sharpa Wave dexterous hands, observed by an SHW5G camera on the head and one on each
-              wrist.
-            </figcaption>
-          </figure>
           <AverageBars
             caption={
               <>
@@ -468,7 +440,7 @@ function ArticleContent() {
                 strongest baseline (DreamZero, 46.0).
               </>
             }
-            figureNumber={9}
+            figureNumber={7}
             rows={REAL_RESULTS}
           />
           <TaskTable
@@ -492,16 +464,6 @@ function ArticleContent() {
             representations.
           </p>
 
-          <h3 className="article-subsection" id="task-episodes">
-            Tasks and aligned code
-          </h3>
-          <p>
-            Below, each of the 8 tasks is shown with one post-training demonstration and the program the annotation
-            pipeline wrote for it. Pick a task and press play: the code block that explains the current frame lights up,
-            and the timeline shows how the episode is sliced into program steps.
-          </p>
-          <TaskEpisodePlayer figureNumber={10} />
-
           <h3 className="article-subsection" id="hybrid">
             Hybrid execution in the real world
           </h3>
@@ -520,7 +482,7 @@ function ArticleContent() {
               width={2600}
             />
             <figcaption>
-              Figure 11: Hybrid actions on <i>Fold and Stack Towels</i>. One episode continues from the upper to the lower
+              Figure 8: Hybrid actions on <i>Fold and Stack Towels</i>. One episode continues from the upper to the lower
               row; green marks code execution and purple marks direct actions.
             </figcaption>
           </figure>
@@ -534,7 +496,7 @@ function ArticleContent() {
             Placing code first (<i>C → V → A</i>) lets both video and action generation attend to the plan, so semantic task
             structure shapes future prediction throughout denoising, and gives the best result on 7 of 8 tasks.
           </p>
-          <GroupedBars caption={<>Impact of the code expert and attention order. C, V, and A denote the code, video, and action streams.</>} figureNumber={12} series={ABL_ATTENTION} />
+          <GroupedBars caption={<>Impact of the code expert and attention order. C, V, and A denote the code, video, and action streams.</>} figureNumber={9} series={ABL_ATTENTION} />
           <p>
             A dedicated ViT is also a better visual input for the code expert than reused Wan2.2 VAE features: VAE features
             are built for pixel reconstruction and poorly support the semantic distinctions needed to select and compose
@@ -548,7 +510,7 @@ function ArticleContent() {
             calls also hurts on all 8 tasks, especially on skill-heavy tasks such as <i>Deal Poker</i> (58.3 vs. 42.0), and full
             programs beat natural-language subgoals on 7 of 8 tasks.
           </p>
-          <GroupedBars caption={<>Impact of code label content.</>} figureNumber={13} series={ABL_LABEL} showValues={false} yMin={0} />
+          <GroupedBars caption={<>Impact of code label content.</>} figureNumber={10} series={ABL_LABEL} showValues={false} yMin={0} />
           <p>
             <strong>How does joint denoising affect performance and efficiency?</strong> Compared with generating code
             autoregressively before the video and action (teacher-forced AR), joint denoising wins on 7 of 8 tasks: early AR
@@ -556,7 +518,7 @@ function ArticleContent() {
             is also faster.
           </p>
           <TaskTable caption={<>Table 3: Impact of the code generation paradigm. Average rubric score (%).</>} label="Paradigm" rows={ABL_GENERATION} />
-          <LatencyChart figureNumber={14} />
+          <LatencyChart figureNumber={11} />
 
           {/* ---- Analysis ---- */}
           <h2 id="analysis">What code changes in the predicted future</h2>
@@ -570,12 +532,12 @@ function ArticleContent() {
           <figure className="aw-figure">
             <ZoomableImage
               alt="Future-frame prediction on Arrange Fruits"
-              className="fig-img"
+              className="fig-img fig-img--pad"
               height={897}
               src={asset("/figures/video_pred_arrange_fruits.webp")}
               width={2600}
             />
-            <figcaption>Figure 15: Future-frame prediction on <i>Arrange Fruits</i> for three models.</figcaption>
+            <figcaption>Figure 12: Future-frame prediction on <i>Arrange Fruits</i> for three models.</figcaption>
           </figure>
           <p>
             On the final stage of <i>Deal Poker</i>, where the right hand inserts a card into a narrow slot, AW-0 predicts the
@@ -586,18 +548,18 @@ function ArticleContent() {
           <figure className="aw-figure">
             <ZoomableImage
               alt="Future-frame prediction on Deal Poker"
-              className="fig-img"
+              className="fig-img fig-img--pad"
               height={897}
               src={asset("/figures/video_pred_deal_poker.webp")}
               width={2600}
             />
-            <figcaption>Figure 16: Future-frame prediction on <i>Deal Poker</i> for three models.</figcaption>
+            <figcaption>Figure 13: Future-frame prediction on <i>Deal Poker</i> for three models.</figcaption>
           </figure>
 
           {/* ---- Failures ---- */}
           <h2 id="failures">Failure cases</h2>
           <p>Six representative failures show where AW-0 still has headroom:</p>
-          <FailureExplorer figureNumber={17} />
+          <FailureExplorer figureNumber={14} />
 
           {/* ---- Limitations ---- */}
           <h2 id="limitations">Limitations &amp; future work</h2>
@@ -633,11 +595,15 @@ function ArticleContent() {
             interact with and learn from their environments.
           </p>
 
-          {/* ---- Citation ---- */}
-          <h2 id="citation">Citation</h2>
-          <p>If you find this work useful, please cite:</p>
-          <CitationBibtex />
-          <p style={{ fontSize: 15, color: "var(--aw-muted)" }}>
+          {/* ---- Citation (shown once BIBTEX is set in src/data/aw0.ts) ---- */}
+          {BIBTEX ? (
+            <>
+              <h2 id="citation">Citation</h2>
+              <p>If you find this work useful, please cite:</p>
+              <CitationBibtex />
+            </>
+          ) : null}
+          <p style={{ fontSize: 15, color: "var(--aw-muted)", marginTop: 48 }}>
             This project page is built on the open-source{" "}
             <a href="https://github.com/enpire-research/enpire-research.github.io" rel="noopener noreferrer" target="_blank">
               ENPIRE

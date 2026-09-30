@@ -20,18 +20,12 @@ JOBS = [  # (source pdf, output name, target width in px)
     ("teaser_v5_0925.pdf", "teaser", 2800),
     ("method_v6_0926.pdf", "method", 2800),
     ("code_label_pipeline_v2_0926.pdf", "annotation_pipeline", 2400),
-    ("hardware_setup/hardware_setup_yam.pdf", "hardware_yam", 1400),
-    ("hardware_setup/hardware_setup_tianji_sharpa.pdf", "hardware_tianji_sharpa", 1700),
     ("appendix/failure_analysis.pdf", "failure_analysis", 2600),
     ("appendix/real_hybrid_progress.pdf", "hybrid_fold_towels", 2600),
     ("video_quality_comparison.pdf", "video_pred_arrange_fruits", 2600),
     ("video_quality_comparison_deal_poker.pdf", "video_pred_deal_poker", 2600),
     ("appendix/blocks_ranking_rgb_progress.pdf", "hybrid_blocks_ranking_rgb", 2600),
     ("appendix/pick_dual_bottles_progress.pdf", "hybrid_pick_dual_bottles", 2600),
-] + [
-    (f"keyframes_codegt/{t}.pdf", f"tasks/{t}", 2400)
-    for t in ["arrange_fruits", "pack_backpack", "replace_lightbulb", "fold_and_stack_towels",
-              "arrange_fruits_sharpa", "deal_poker", "flip_scoreboard", "solve_rubiks_cube"]
 ]
 
 
@@ -40,7 +34,7 @@ def run(*cmd):
 
 
 def main():
-    os.makedirs(os.path.join(OUT, "tasks"), exist_ok=True)
+    os.makedirs(OUT, exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
         for src, name, width in JOBS:
             pdf = os.path.join(PAPER, src)

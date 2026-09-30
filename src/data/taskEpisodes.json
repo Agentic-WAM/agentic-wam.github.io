@@ -6,7 +6,6 @@
   "instruction": "Arrange the fruits so that finally there are only banana and cucumber in the left bowl.",
   "fps": 30,
   "video": "/videos/episodes/arrange_fruits.mp4",
-  "figure": "/figures/tasks/arrange_fruits.webp",
   "blocks": [
    [
     {
@@ -130,7 +129,6 @@
   "instruction": "Pack the backpack.",
   "fps": 30,
   "video": "/videos/episodes/pack_backpack.mp4",
-  "figure": "/figures/tasks/pack_backpack.webp",
   "blocks": [
    [
     {
@@ -304,7 +302,6 @@
   "instruction": "Change the lightbulb if it doesn't work.",
   "fps": 30,
   "video": "/videos/episodes/replace_lightbulb.mp4",
-  "figure": "/figures/tasks/replace_lightbulb.webp",
   "blocks": [
    [
     {
@@ -462,7 +459,6 @@
   "instruction": "Fold the towels and stack them in pink, brown, green order.",
   "fps": 30,
   "video": "/videos/episodes/fold_and_stack_towels.mp4",
-  "figure": "/figures/tasks/fold_and_stack_towels.webp",
   "blocks": [
    [
     {
@@ -765,7 +761,6 @@
   "instruction": "Arrange the fruits so that there will be only pear in the left bowl.",
   "fps": 30,
   "video": "/videos/episodes/arrange_fruits_sharpa.mp4",
-  "figure": "/figures/tasks/arrange_fruits_sharpa.webp",
   "blocks": [
    [
     {
@@ -960,7 +955,6 @@
   "instruction": "Pick up the poker with the right hand, transfer it to the left hand, then use the right hand to pull out the first card and insert it into the slot.",
   "fps": 30,
   "video": "/videos/episodes/deal_poker.mp4",
-  "figure": "/figures/tasks/deal_poker.webp",
   "blocks": [
    [
     {
@@ -1109,7 +1103,6 @@
   "instruction": "Add 2 to the scoreboard then press the button.",
   "fps": 30,
   "video": "/videos/episodes/flip_scoreboard.mp4",
-  "figure": "/figures/tasks/flip_scoreboard.webp",
   "blocks": [
    [
     {
@@ -1193,7 +1186,6 @@
   "instruction": "Solve the Rubik's cube.",
   "fps": 60,
   "video": "/videos/episodes/solve_rubiks_cube.mp4",
-  "figure": "/figures/tasks/solve_rubiks_cube.webp",
   "blocks": [
    [
     {

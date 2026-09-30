@@ -1,5 +1,5 @@
 """Export the 8 real-world task episodes shown in the paper's "Real-world Task Progress" appendix
-(keyframes_codegt/*.pdf) for the website's code-aligned episode player.
+(keyframes_codegt/*.pdf); the website currently uses them for the temporary hero mosaic.
 
 For every task it reuses the exact spec that draws the appendix figure
 (DexWAM/make_task_keyframe_drawio.py -> TASKS), resolves the code blocks and the
@@ -82,7 +82,6 @@ def main():
             "instruction": instruction,
             "fps": spec["fps"],
             "video": f"/videos/episodes/{key}.mp4",
-            "figure": f"/figures/tasks/{key}.webp",
             "blocks": [[{"text": t, "executed": bool(e)} for t, e in b] for b in blocks],
             "segments": [
                 {"start": s["frames"][0], "end": s["frames"][1], "block": s["block"], **({"label": s["label"]} if s.get("label") else {})}

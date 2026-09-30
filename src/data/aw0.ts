@@ -9,6 +9,15 @@ export const LINKS = {
   code: null as string | null, // TODO: GitHub repository URL
 };
 
+// BibTeX shown in the Citation section. Paste arXiv's exported entry here once
+// the paper is posted; while it is null the Citation section is not rendered.
+export const BIBTEX: string | null = null;
+
+// Full overview video (~3 min, like T-Rex's teaser_full.mp4), shown right under
+// the title block with player controls. While it is null a placeholder marks
+// its spot. Put the file in public/videos/ and set e.g. "/videos/overview.mp4".
+export const OVERVIEW_VIDEO: string | null = null;
+
 // Hero teaser video (like T-Rex's hero_short.mp4). While it is null the hero
 // shows a muted mosaic of the eight real-world task episodes instead.
 export const HERO_VIDEO: string | null = null;
@@ -64,12 +73,11 @@ export const PRETRAIN_STATS = [
   { num: "2,913 h", label: "Robot + human video" },
   { num: "248,642", label: "Episodes" },
   { num: "606", label: "Tasks" },
-  { num: "2.08M", label: "Aligned program slices" },
   { num: "50", label: "Reusable skills" },
 ];
 
 // ---------------------------------------------------------------------------
-// RoboTwin 2.0 (Table 1 + appendix per-task table). Success rate (%).
+// RoboTwin 2.0 (Table 1). Success rate (%).
 // ---------------------------------------------------------------------------
 export type SimRow = { method: string; clean: number; random: number; avg: number; ours?: boolean };
 export const ROBOTWIN_MAIN: SimRow[] = [
@@ -81,61 +89,6 @@ export const ROBOTWIN_MAIN: SimRow[] = [
   { method: "AW-0 (hybrid)", clean: 63.1, random: 29.2, avg: 46.2, ours: true },
 ];
 
-export const ROBOTWIN_METHODS = ["π0.5", "EgoScale", "DreamZero", "WLA", "AW-0 (ours)", "AW-0 (hybrid)"];
-// [task, clean/random pairs in ROBOTWIN_METHODS order]
-export const ROBOTWIN_PER_TASK: [string, number[]][] = [
-  ["Adjust Bottle", [62, 18, 26, 0, 0, 6, 100, 0, 100, 50, 90, 48]],
-  ["Beat Block Hammer", [48, 16, 22, 0, 26, 12, 82, 0, 94, 28, 46, 24]],
-  ["Blocks Ranking RGB", [74, 16, 0, 0, 0, 0, 54, 0, 96, 32, 94, 82]],
-  ["Blocks Ranking Size", [32, 0, 0, 0, 16, 0, 32, 0, 56, 0, 64, 50]],
-  ["Click Alarmclock", [44, 56, 88, 16, 100, 24, 100, 42, 96, 56, 100, 62]],
-  ["Click Bell", [32, 40, 92, 36, 100, 66, 100, 48, 96, 18, 100, 72]],
-  ["Dump Bin Bigbin", [72, 70, 32, 18, 0, 0, 100, 12, 98, 20, 78, 14]],
-  ["Grab Roller", [94, 46, 96, 6, 64, 22, 100, 0, 100, 32, 92, 50]],
-  ["Handover Block", [16, 0, 4, 0, 0, 0, 8, 0, 82, 0, 4, 0]],
-  ["Handover Mic", [26, 4, 0, 0, 16, 0, 68, 0, 98, 12, 34, 2]],
-  ["Hanging Mug", [10, 4, 0, 0, 0, 0, 8, 0, 30, 0, 2, 0]],
-  ["Lift Pot", [8, 2, 0, 0, 8, 0, 88, 0, 90, 4, 66, 0]],
-  ["Move Can Pot", [28, 0, 24, 0, 4, 4, 64, 0, 76, 6, 82, 52]],
-  ["Move Pillbottle Pad", [60, 44, 36, 0, 34, 16, 72, 0, 92, 6, 96, 6]],
-  ["Move Playingcard Away", [90, 52, 46, 0, 0, 4, 94, 0, 100, 46, 86, 30]],
-  ["Move Stapler Pad", [22, 6, 0, 0, 0, 0, 2, 0, 38, 0, 26, 2]],
-  ["Open Laptop", [68, 20, 20, 0, 66, 22, 90, 0, 84, 38, 72, 48]],
-  ["Open Microwave", [26, 8, 8, 2, 12, 8, 0, 0, 20, 4, 46, 24]],
-  ["Pick Diverse Bottles", [56, 18, 44, 0, 40, 16, 76, 12, 76, 36, 74, 32]],
-  ["Pick Dual Bottles", [82, 14, 38, 4, 54, 42, 80, 0, 80, 28, 96, 28]],
-  ["Place A2B Left", [60, 10, 0, 0, 22, 14, 48, 0, 84, 30, 98, 58]],
-  ["Place A2B Right", [58, 14, 4, 0, 24, 8, 54, 0, 80, 26, 96, 80]],
-  ["Place Bread Basket", [68, 44, 44, 0, 62, 12, 84, 0, 92, 20, 80, 6]],
-  ["Place Bread Skillet", [86, 46, 32, 0, 36, 34, 64, 0, 90, 14, 24, 2]],
-  ["Place Burger Fries", [90, 78, 78, 0, 70, 62, 100, 0, 94, 20, 66, 22]],
-  ["Place Can Basket", [40, 0, 6, 0, 26, 12, 42, 6, 70, 8, 26, 8]],
-  ["Place Cans Plasticbox", [94, 74, 40, 0, 0, 12, 100, 0, 98, 12, 80, 34]],
-  ["Place Container Plate", [96, 58, 46, 0, 96, 44, 100, 0, 94, 26, 86, 22]],
-  ["Place Dual Shoes", [54, 12, 8, 0, 20, 0, 32, 0, 64, 12, 2, 2]],
-  ["Place Empty Cup", [74, 56, 72, 0, 76, 50, 94, 0, 98, 16, 96, 14]],
-  ["Place Fan", [36, 30, 12, 0, 0, 0, 8, 0, 70, 4, 16, 10]],
-  ["Place Mouse Pad", [18, 0, 2, 0, 10, 0, 26, 0, 64, 0, 18, 4]],
-  ["Place Object Basket", [24, 4, 0, 0, 10, 0, 42, 2, 84, 14, 50, 4]],
-  ["Place Object Scale", [58, 44, 8, 0, 36, 8, 36, 0, 70, 18, 88, 50]],
-  ["Place Object Stand", [94, 40, 26, 0, 50, 26, 92, 6, 92, 26, 62, 56]],
-  ["Place Phone Stand", [40, 4, 8, 0, 22, 0, 86, 0, 90, 22, 82, 54]],
-  ["Place Shoe", [64, 24, 22, 6, 18, 6, 72, 0, 78, 22, 60, 30]],
-  ["Press Stapler", [42, 32, 100, 20, 88, 44, 82, 0, 86, 8, 100, 68]],
-  ["Put Bottles Dustbin", [14, 2, 0, 0, 4, 6, 16, 0, 86, 12, 14, 0]],
-  ["Put Object Cabinet", [22, 0, 12, 0, 4, 0, 68, 0, 56, 6, 66, 0]],
-  ["Rotate QRcode", [50, 2, 32, 0, 0, 0, 22, 0, 70, 4, 40, 28]],
-  ["Scan Object", [62, 38, 4, 0, 40, 20, 80, 0, 68, 10, 16, 10]],
-  ["Shake Bottle Horizontally", [98, 74, 72, 30, 100, 86, 100, 26, 100, 62, 100, 26]],
-  ["Shake Bottle", [96, 72, 80, 6, 100, 76, 100, 24, 100, 58, 94, 30]],
-  ["Stack Blocks Three", [68, 16, 0, 0, 10, 0, 12, 0, 92, 18, 62, 56]],
-  ["Stack Blocks Two", [80, 56, 6, 0, 58, 46, 90, 0, 70, 18, 80, 82]],
-  ["Stack Bowls Three", [38, 36, 0, 0, 14, 14, 88, 0, 78, 40, 44, 4]],
-  ["Stack Bowls Two", [82, 44, 0, 0, 88, 24, 100, 0, 98, 56, 52, 44]],
-  ["Stamp Seal", [32, 2, 6, 0, 40, 16, 40, 0, 78, 2, 58, 4]],
-  ["Turn Switch", [56, 40, 12, 0, 14, 18, 42, 0, 44, 28, 52, 28]],
-];
-export const ROBOTWIN_PER_TASK_AVG = [54.9, 27.7, 26.2, 2.9, 33.6, 17.6, 64.8, 3.6, 80.8, 20.6, 63.1, 29.2];
 
 // ---------------------------------------------------------------------------
 // Real world (Table 2). Average rubric score (%) over 3x16 rollouts per task.
@@ -173,97 +126,53 @@ export type Series = { name: string; color: string; vals: number[]; avg: number;
 
 // Figure 5: attention order during joint denoising.
 export const ABL_ATTENTION: Series[] = [
-  { name: "C → V → A (ours)", color: "#8CB6D0", vals: [91.7, 64.6, 75.0, 84.4, 54.2, 58.3, 68.8, 72.1], avg: 71.1, ours: true },
+  { name: "C → V → A (ours)", color: "#F2A81E", vals: [91.7, 64.6, 75.0, 84.4, 54.2, 58.3, 68.8, 72.1], avg: 71.1, ours: true },
   { name: "V → C → A", color: "#A2C27C", vals: [31.3, 29.1, 77.1, 60.8, 25.0, 52.1, 45.8, 65.3], avg: 48.3 },
   { name: "V → A (w/o code)", color: "#C2ABE3", vals: [27.1, 16.7, 47.9, 53.2, 10.4, 20.8, 39.6, 47.1], avg: 32.9 },
 ];
 
 // Table 3: visual conditioning of the code expert.
 export const ABL_VISUAL: Series[] = [
-  { name: "ViT (ours)", color: "#8CB6D0", vals: [91.7, 64.6, 75.0, 84.4, 54.2, 58.3, 68.8, 72.1], avg: 71.1, ours: true },
-  { name: "VAE", color: "#E9C77C", vals: [83.3, 39.6, 66.7, 61.3, 41.7, 47.9, 50.0, 53.9], avg: 55.6 },
+  { name: "ViT (ours)", color: "#F2A81E", vals: [91.7, 64.6, 75.0, 84.4, 54.2, 58.3, 68.8, 72.1], avg: 71.1, ours: true },
+  { name: "VAE", color: "#A2C27C", vals: [83.3, 39.6, 66.7, 61.3, 41.7, 47.9, 50.0, 53.9], avg: 55.6 },
 ];
 
 // Figure 7: content of the code label.
 export const ABL_LABEL: Series[] = [
-  { name: "Code (ours)", color: "#8CB6D0", vals: [91.7, 64.6, 75.0, 84.4, 54.2, 58.3, 68.8, 72.1], avg: 71.1, ours: true },
+  { name: "Code (ours)", color: "#F2A81E", vals: [91.7, 64.6, 75.0, 84.4, 54.2, 58.3, 68.8, 72.1], avg: 71.1, ours: true },
   { name: "Code w/o comments", color: "#A2C27C", vals: [80.4, 52.1, 68.6, 80.1, 45.8, 47.5, 62.5, 65.7], avg: 62.8 },
   { name: "Code w/o skills", color: "#C2ABE3", vals: [90.2, 55.9, 65.5, 76.9, 48.9, 42.0, 63.7, 63.2], avg: 63.3 },
-  { name: "Subgoal (language)", color: "#E9C77C", vals: [88.3, 56.3, 72.9, 78.2, 58.3, 43.8, 52.1, 59.2], avg: 63.6 },
+  { name: "Subgoal (language)", color: "#93C9C0", vals: [88.3, 56.3, 72.9, 78.2, 58.3, 43.8, 52.1, 59.2], avg: 63.6 },
 ];
 
 // Table 4 + Figure 6: code generation paradigm and inference latency (RTX 5090).
 export const ABL_GENERATION: Series[] = [
-  { name: "Joint denoise (ours)", color: "#8CB6D0", vals: [91.7, 64.6, 75.0, 84.4, 54.2, 58.3, 68.8, 72.1], avg: 71.1, ours: true },
-  { name: "Autoregressive (AR)", color: "#F2C29B", vals: [81.3, 62.5, 79.2, 53.2, 20.8, 44.1, 39.3, 55.8], avg: 54.5 },
+  { name: "Joint denoise (ours)", color: "#F2A81E", vals: [91.7, 64.6, 75.0, 84.4, 54.2, 58.3, 68.8, 72.1], avg: 71.1, ours: true },
+  { name: "Autoregressive (AR)", color: "#A2C27C", vals: [81.3, 62.5, 79.2, 53.2, 20.8, 44.1, 39.3, 55.8], avg: 54.5 },
 ];
 export const LATENCY = [
   { name: "V → A (w/o code)", latency: 0.19, score: 32.9, color: "#C2ABE3" },
-  { name: "Joint denoise (ours)", latency: 0.23, score: 71.1, color: "#8CB6D0", ours: true },
-  { name: "Autoregressive (AR)", latency: 0.55, score: 54.5, color: "#F2C29B" },
+  { name: "Joint denoise (ours)", latency: 0.23, score: 71.1, color: "#F2A81E", ours: true },
+  { name: "Autoregressive (AR)", latency: 0.55, score: 54.5, color: "#A2C27C" },
 ];
 
 // ---------------------------------------------------------------------------
-// Grading rubrics (Appendix "Real-world Task Progress"), keyed by episode id.
+// Demonstrations: one AW-0 policy rollout per real-world task (like T-Rex's
+// demo gallery). Put the clips in public/videos/demos/ and set `video`, e.g.
+// "/videos/demos/arrange_fruits.mp4"; `instruction` is the language command of
+// that rollout. A task whose video is null shows a "coming soon" placeholder.
 // ---------------------------------------------------------------------------
-export const RUBRICS: Record<string, { pts: string; text: string }[]> = {
-  arrange_fruits: [
-    { pts: "+0.3", text: "Moves each fruit not named in the instruction from the left bowl into the right basket (or none to remove)." },
-    { pts: "+0.3", text: "Moves each named fruit not yet in the left bowl from the right basket into the bowl (or none to fetch)." },
-    { pts: "+0.4", text: "Final state matches the instruction and no fruit is dropped." },
-  ],
-  pack_backpack: [
-    { pts: "+0.15", text: "Left gripper grasps the zipper pull at the left end and slides it to the middle." },
-    { pts: "+0.15", text: "Right gripper re-grasps the pull at the middle and slides it to the right end." },
-    { pts: "+0.2", text: "Open the backpack with the left gripper." },
-    { pts: "+0.2", text: "Picks up the item from the table and places it inside the open backpack." },
-    { pts: "+0.15", text: "Right gripper grasps the pull at the right end and slides it back to the middle." },
-    { pts: "+0.15", text: "Left gripper slides the pull from the middle to the left end; the backpack is fully closed with the item inside." },
-  ],
-  replace_lightbulb: [
-    { pts: "+0.1", text: "Left gripper presses the inline switch and the bulb stays dark." },
-    { pts: "+0.1", text: "Left gripper braces the lamp base." },
-    { pts: "+0.2", text: "Right gripper unscrews the dead bulb and lifts it out of the socket." },
-    { pts: "+0.1", text: "Dead bulb is set down in the bulb tray." },
-    { pts: "+0.1", text: "Right gripper picks up the spare bulb." },
-    { pts: "+0.3", text: "Spare bulb is seated in the socket and screwed in clockwise until lit." },
-    { pts: "+0.1", text: "When the bulb is lit, release both arms to their home positions." },
-  ],
-  fold_and_stack_towels: [
-    { pts: "+0.2", text: "Grasps a towel edge and completes one fold." },
-    { pts: "+0.2", text: "Each of the three towels is folded flat." },
-    { pts: "+0.1", text: "Picks a folded towel up and lays it on the pile." },
-    { pts: "+0.2", text: "All three folded towels end up in a single pile, none dropped or left behind." },
-    { pts: "+0.3", text: "The pile reads, bottom to top, in the colour order the instruction names." },
-  ],
-  arrange_fruits_sharpa: [
-    { pts: "+0.2", text: "Right hand takes the tongs off their stand and keeps hold of them." },
-    { pts: "+0.25", text: "Moves each fruit not named in the instruction from the left bowl into the tray (or none to remove)." },
-    { pts: "+0.25", text: "Moves each named fruit not yet in the left bowl from the tray into the bowl (or none to fetch)." },
-    { pts: "+0.2", text: "Final state matches the instruction and no fruit is dropped." },
-    { pts: "+0.1", text: "Tongs are put back on their stand." },
-  ],
-  deal_poker: [
-    { pts: "+0.1", text: "Right hand grasps the card stack from above." },
-    { pts: "+0.2", text: "Right hand transfers the stack to the left hand (handover)." },
-    { pts: "+0.3", text: "Right thumb flicks and adjusts until exactly one card protrudes from the top." },
-    { pts: "+0.3", text: "Right hand grasps the single protruding card." },
-    { pts: "+0.1", text: "Right hand inserts the card vertically into the card slot." },
-  ],
-  flip_scoreboard: [
-    { pts: "+0.1", text: "Left hand holds the scoreboard steady." },
-    { pts: "+0.2", text: "Right hand flips a digit card over (at least one complete flip)." },
-    { pts: "+0.4", text: "Flips exactly k times, so the board shows the initial score plus k." },
-    { pts: "+0.1", text: "Left hand releases the board." },
-    { pts: "+0.2", text: "Right hand presses the red button while the target score is showing." },
-  ],
-  solve_rubiks_cube: [
-    { pts: "+0.2", text: "Right hand grasps the cube and lifts it off the table." },
-    { pts: "+0.3", text: "Fingers turn the scrambled layer a full quarter turn, leaving no layer half-turned." },
-    { pts: "+0.3", text: "The cube is solved: every face shows a single colour." },
-    { pts: "+0.2", text: "The cube is put back on the table and both hands let go." },
-  ],
-};
+export type DemoTask = { id: string; label: string; platform: Platform; video: string | null; instruction: string | null };
+export const DEMOS: DemoTask[] = [
+  { id: "arrange_fruits", label: "Arrange Fruits", platform: "yam", video: null, instruction: null },
+  { id: "pack_backpack", label: "Pack Backpack", platform: "yam", video: null, instruction: null },
+  { id: "replace_lightbulb", label: "Replace Lightbulb", platform: "yam", video: null, instruction: null },
+  { id: "fold_and_stack_towels", label: "Fold and Stack Towels", platform: "yam", video: null, instruction: null },
+  { id: "arrange_fruits_with_tongs", label: "Arrange Fruits with Tongs", platform: "sharpa", video: null, instruction: null },
+  { id: "deal_poker", label: "Deal Poker", platform: "sharpa", video: null, instruction: null },
+  { id: "flip_scoreboard", label: "Flip Scoreboard", platform: "sharpa", video: null, instruction: null },
+  { id: "solve_rubiks_cube", label: "Solve Rubik's Cube", platform: "sharpa", video: null, instruction: null },
+];
 
 // ---------------------------------------------------------------------------
 // Skill library (Appendix "Skill Library Definitions" + skill visualizations).

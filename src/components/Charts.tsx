@@ -6,16 +6,14 @@ import {
   PLATFORM_LABEL,
   REAL_TASKS,
   ROBOTWIN_MAIN,
-  ROBOTWIN_METHODS,
-  ROBOTWIN_PER_TASK,
-  ROBOTWIN_PER_TASK_AVG,
   type Platform,
   type RealRow,
   type Series,
 } from "@/data/aw0";
 import { useInView } from "@/lib/useInView";
 
-const PLATFORM_COLOR: Record<Platform, string> = { yam: "var(--aw-video)", sharpa: "var(--aw-action)" };
+// Baselines share one soft colour; only AW-0 is gold (as on the T-Rex page).
+const NEUTRAL = "var(--aw-base-deep)";
 const PLATFORMS: Platform[] = ["yam", "sharpa"];
 const tasksOf = (p: Platform) => REAL_TASKS.filter((t) => t.platform === p);
 
@@ -66,62 +64,6 @@ export function RoboTwinBars({ figureNumber }: { figureNumber: number }) {
   );
 }
 
-export function RoboTwinPerTask() {
-  const [open, setOpen] = useState(false);
-  return (
-    <details className="aw-details" onToggle={(e) => setOpen(e.currentTarget.open)}>
-      <summary>Per-task RoboTwin 2.0 results (50 tasks × 2 settings)</summary>
-      {open ? (
-        <div className="aw-table-wrap aw-table-wrap--tall">
-          <table className="aw-table aw-table--dense">
-            <thead>
-              <tr>
-                <th rowSpan={2}>Task</th>
-                {ROBOTWIN_METHODS.map((m) => (
-                  <th colSpan={2} data-ours={m.startsWith("AW-0") ? "true" : undefined} key={m}>
-                    {m}
-                  </th>
-                ))}
-              </tr>
-              <tr>
-                {ROBOTWIN_METHODS.map((m) => (
-                  <Fragment key={m}>
-                    <th className="aw-table__sub">Clean</th>
-                    <th className="aw-table__sub">Rand.</th>
-                  </Fragment>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {ROBOTWIN_PER_TASK.map(([task, vals]) => {
-                const bestClean = Math.max(...vals.filter((_, i) => i % 2 === 0));
-                const bestRand = Math.max(...vals.filter((_, i) => i % 2 === 1));
-                return (
-                  <tr key={task}>
-                    <td>{task}</td>
-                    {vals.map((v, i) => (
-                      <td className={v === (i % 2 === 0 ? bestClean : bestRand) ? "is-best" : undefined} key={i}>
-                        {v}
-                      </td>
-                    ))}
-                  </tr>
-                );
-              })}
-              <tr className="aw-table__total">
-                <td>Average</td>
-                {ROBOTWIN_PER_TASK_AVG.map((v, i) => (
-                  <td key={i}>{v.toFixed(1)}</td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      ) : null}
-      <p className="aw-note">Success rate (%) over 50 rollouts per task per setting; the best result per task and setting is in bold.</p>
-    </details>
-  );
-}
-
 // ---------------------------------------------------------------------------
 // Real world: average bars + per-task table (Table 2).
 // ---------------------------------------------------------------------------
@@ -163,7 +105,7 @@ export function TaskTable({ rows, label, caption }: { rows: { name: string; vals
             <tr>
               <th rowSpan={2}>{label}</th>
               {PLATFORMS.map((p) => (
-                <th className="aw-table__group" colSpan={tasksOf(p).length} key={p} style={{ borderBottomColor: PLATFORM_COLOR[p] }}>
+                <th className="aw-table__group" colSpan={tasksOf(p).length} key={p} style={{ borderBottomColor: NEUTRAL }}>
                   {PLATFORM_LABEL[p]}
                 </th>
               ))}
@@ -186,7 +128,7 @@ export function TaskTable({ rows, label, caption }: { rows: { name: string; vals
                     <span
                       className="aw-cell__bg"
                       style={{
-                        background: PLATFORM_COLOR[REAL_TASKS[i].platform],
+                        background: r.ours ? "var(--aw-accent-bright)" : NEUTRAL,
                         opacity: inView ? Math.min(0.26, (v / 100) * 0.3) : 0,
                         transitionDelay: `${i * 25}ms`,
                       }}
@@ -274,7 +216,7 @@ export function GroupedBars({
             const x1 = padL + (first + n) * gw - 6;
             return (
               <g key={p}>
-                <line stroke={PLATFORM_COLOR[p]} strokeWidth={2.5} x1={x0} x2={x1} y1={12} y2={12} />
+                <line stroke={NEUTRAL} strokeWidth={2.5} x1={x0} x2={x1} y1={12} y2={12} />
                 <text className="gb-platform" textAnchor="middle" x={(x0 + x1) / 2} y={27}>
                   {PLATFORM_LABEL[p]}
                 </text>
@@ -354,8 +296,8 @@ export function LatencyChart({ figureNumber }: { figureNumber: number }) {
             </div>
             <div className="lat-track">
               <div
-                className="lat-fill lat-fill--time"
-                style={{ width: inView ? `${(r.latency / 0.6) * 100}%` : "0%", transitionDelay: `${i * 90}ms` }}
+                className="lat-fill"
+                style={{ width: inView ? `${(r.latency / 0.6) * 100}%` : "0%", background: r.color, transitionDelay: `${i * 90}ms` }}
               />
               <span className="lat-val">{r.latency.toFixed(2)} s</span>
             </div>
