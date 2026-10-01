@@ -1,6 +1,6 @@
 "use client";
 
-import { Code, FileText, List, Play, X } from "lucide-react";
+import { Code, FileText, List, X } from "lucide-react";
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
 import Hero from "@/components/Hero";
@@ -22,6 +22,7 @@ import {
   BIBTEX,
   LINKS,
   LOGOS,
+  OVERVIEW_POSTER,
   OVERVIEW_VIDEO,
   PRETRAIN_STATS,
   REAL_RESULTS,
@@ -31,6 +32,7 @@ import { asset } from "@/lib/asset";
 const outlineItems: { href: string; label: string; level?: number }[] = [
   { href: "#article-title", label: "Title" },
   { href: "#abstract", label: "Abstract" },
+  { href: "#overview", label: "Full video", level: 2 },
   { href: "#contributions", label: "Contributions" },
   { href: "#method", label: "Agentic World Action Model" },
   { href: "#joint-denoising", label: "Joint denoising", level: 2 },
@@ -206,18 +208,6 @@ function ArticleContent() {
             </div>
           </header>
 
-          {/* ---- Overview video (~3 min), placed like T-Rex's full video ---- */}
-          <figure className="aw-figure">
-            {OVERVIEW_VIDEO ? (
-              <video autoPlay className="fig-img" controls loop muted playsInline preload="metadata" src={asset(OVERVIEW_VIDEO)} />
-            ) : (
-              <div aria-label="Overview video coming soon" className="aw-video-slot" role="img">
-                <Play aria-hidden="true" size={22} strokeWidth={1.8} />
-                <span>Overview video (about 3 minutes) — coming soon</span>
-              </div>
-            )}
-          </figure>
-
           {/* ---- Abstract ---- */}
           <h2 id="abstract">Abstract</h2>
           <p>
@@ -236,6 +226,20 @@ function ArticleContent() {
             language following, semantic reasoning and robustness, demonstrating that agentic code enables connection
             between planning, prediction and execution within WAMs.
           </p>
+
+          {/* ---- Full project film ---- */}
+          <figure className="aw-figure" id="overview">
+            <video
+              aria-label="AW-0 full project video"
+              className="fig-img"
+              controls
+              playsInline
+              poster={asset(OVERVIEW_POSTER)}
+              preload="none"
+              src={asset(OVERVIEW_VIDEO)}
+            />
+            <figcaption><b>AW-0: Agentic World Action Model.</b> Full project video.</figcaption>
+          </figure>
 
           {/* ---- Contributions ---- */}
           <h2 id="contributions">Contributions</h2>

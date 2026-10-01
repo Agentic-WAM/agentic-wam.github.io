@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { HERO_VIDEO } from "@/data/aw0";
+import { HERO_POSTER, HERO_VIDEO } from "@/data/aw0";
 import episodes from "@/data/taskEpisodes.json";
 import { asset } from "@/lib/asset";
 
@@ -207,7 +207,7 @@ export default function Hero() {
   return (
     <section className="article-hero aw-hero" data-state={phase}>
       <div className="article-hero__sticky">
-        {HERO_VIDEO ? <TeaserVideo src={asset(HERO_VIDEO)} /> : <EpisodeMosaic />}
+        {HERO_VIDEO ? <TeaserVideo src={asset(HERO_VIDEO)} poster={asset(HERO_POSTER)} /> : <EpisodeMosaic />}
         <div aria-hidden="true" className="aw-hero__veil" />
         <div className="article-hero__title" data-revealed={lettersOn}>
           <div aria-hidden="true" className="article-hero__wordmark">
@@ -276,7 +276,7 @@ function EpisodeMosaic() {
 
 // The teaser clip, as on the T-Rex page: a black curtain hides the page until
 // the video can play through (with timeout / error / <noscript> escape hatches).
-function TeaserVideo({ src }: { src: string }) {
+function TeaserVideo({ src, poster }: { src: string; poster: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
 
@@ -333,12 +333,13 @@ function TeaserVideo({ src }: { src: string }) {
       </noscript>
       <div aria-hidden="true" className={`hero-curtain${ready ? " hero-curtain--lifted" : ""}`} />
       <video
-        aria-label="AW-0 demo"
+        aria-label="AW-0 rapid-cut montage of six robot manipulation tasks"
         autoPlay
         className="article-hero__video"
         loop
         muted
         playsInline
+        poster={poster}
         preload="auto"
         ref={videoRef}
         src={src}

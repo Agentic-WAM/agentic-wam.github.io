@@ -48,7 +48,8 @@ folder `/ (root)`. The first deploy takes a minute or two. To update the site la
 
 ## Notes
 
-- The eight episode videos (~13 MB) and the figures are committed with the site; the whole build is ~25 MB, far below the
-  Pages limits. A long teaser or many demo videos are better hosted elsewhere (T-Rex streams its videos from a Hugging
-  Face dataset) and referenced by URL.
+- The rapid-cut hero, full project film, eight complete rollout videos, their posters, and the older episode clips are served
+  from `public/videos/` and copied into `out/videos/` by the build. The new web copies are 1080p H.264 MP4s with fast-start
+  metadata and each is below 100 MB. See `public/videos/media-manifest.json` for source mapping, durations, and sizes.
+  Keep the multi-gigabyte camera originals outside the repository; the web copies are sufficient for deployment.
 - `next/font` downloads the Google fonts at build time, so `npm run build` needs internet access.

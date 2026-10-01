@@ -17,6 +17,8 @@ type VideoPlayerProps = {
   autoPlay?: boolean;
   // Starting playback rate; the speed toggle cycles from here through SPEEDS.
   playbackRate?: number;
+  allowSpeedChange?: boolean;
+  controlsPlacement?: "overlay" | "below";
   // Callback ref to the inner <video> (e.g. for an IntersectionObserver that
   // plays the in-view card in a carousel).
   onVideoRef?: (el: HTMLVideoElement | null) => void;
@@ -36,6 +38,8 @@ export default function VideoPlayer({
   loop = false,
   autoPlay = false,
   playbackRate = 2,
+  allowSpeedChange = true,
+  controlsPlacement = "overlay",
   onVideoRef,
   onEnded,
 }: VideoPlayerProps) {
@@ -47,7 +51,7 @@ export default function VideoPlayer({
   const [playing, setPlaying] = useState(autoPlay);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-  const speed = SPEEDS[speedIndex];
+  const speed = allowSpeedChange ? SPEEDS[speedIndex] : playbackRate;
 
   useEffect(() => {
     if (videoRef.current) videoRef.current.playbackRate = speed;
@@ -75,8 +79,19 @@ export default function VideoPlayer({
     }
   };
 
+  const expandButton = (
+    <button
+      aria-label={`Expand ${title} to full-screen player`}
+      className={controlsPlacement === "overlay" ? "video-player__overlay-button video-player__expand" : undefined}
+      onClick={expand}
+      type="button"
+    >
+      <Maximize2 aria-hidden="true" size={16} strokeWidth={1.8} />
+    </button>
+  );
+
   return (
-    <div className="video-player">
+    <div className="video-player" data-controls-placement={controlsPlacement}>
       <video
         autoPlay={autoPlay}
         className={className}
@@ -105,16 +120,7 @@ export default function VideoPlayer({
         }}
         src={src}
       />
-      <div className="video-player__overlay">
-        <button
-          aria-label={`Expand ${title} to full-screen player`}
-          className="video-player__overlay-button video-player__expand"
-          onClick={expand}
-          type="button"
-        >
-          <Maximize2 aria-hidden="true" size={16} strokeWidth={1.8} />
-        </button>
-      </div>
+      {controlsPlacement === "overlay" ? <div className="video-player__overlay">{expandButton}</div> : null}
       <div
         className="video-player__bar expandable-video-modal__controls"
         style={{ "--expandable-video-progress": progress } as CSSProperties}
@@ -122,14 +128,20 @@ export default function VideoPlayer({
         <button aria-label={playing ? `Pause ${title}` : `Play ${title}`} onClick={togglePlay} type="button">
           {playing ? <Pause aria-hidden="true" size={15} /> : <Play aria-hidden="true" size={15} />}
         </button>
-        <button
-          aria-label={`${title} playback speed ${speed}x. Click to change speed.`}
-          className="expandable-video-modal__speed"
-          onClick={cycleSpeed}
-          type="button"
-        >
-          {speed}x
-        </button>
+        {allowSpeedChange ? (
+          <button
+            aria-label={`${title} playback speed ${speed}x. Click to change speed.`}
+            className="expandable-video-modal__speed"
+            onClick={cycleSpeed}
+            type="button"
+          >
+            {speed}×
+          </button>
+        ) : (
+          <span aria-label={`${title} playback speed fixed at ${speed}x`} className="expandable-video-modal__speed">
+            {speed}×
+          </span>
+        )}
         <div className="expandable-video-modal__progress-shell">
           <div className="expandable-video-modal__progress-rail" aria-hidden="true">
             <span />
@@ -145,13 +157,14 @@ export default function VideoPlayer({
             value={progress}
           />
         </div>
+        {controlsPlacement === "below" ? expandButton : null}
       </div>
       <ExpandableVideoViewer
         initialTime={initialTime}
         isOpen={open}
         loop={loop}
         onClose={() => setOpen(false)}
-        onCycleSpeed={cycleSpeed}
+        onCycleSpeed={allowSpeedChange ? cycleSpeed : undefined}
         playbackRate={speed}
         poster={poster}
         speedLabel={`${speed}x`}

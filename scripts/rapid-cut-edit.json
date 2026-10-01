@@ -1,0 +1,179 @@
+{
+  "sourceFolder": "https://drive.google.com/drive/folders/1LQIQxBMn4vunfR0vwzJljIs4q6cxp0lo",
+  "reference": "https://tactile-reactive-dexterous.github.io/",
+  "description": "Clean, silent, hard-cut loop alternating six task types and two robot embodiments. Opens with YAM screwing in and illuminating a lightbulb. No scoreboard footage. Distinct close and overhead views; no source audio or titles. The edit uses only dedicated rapid camera footage.",
+  "fps": 30,
+  "shots": [
+    {
+      "source": "yam_replace_bulb_ours_26_success_rapid_4k_60fps_0916.MOV",
+      "driveFileId": "1fJTLn41HW6r3hdQK0IyY4Z0pmq50llNk",
+      "sourceIn": 16.6,
+      "sourceOut": 23.8,
+      "speed": 3,
+      "hdr": true,
+      "action": "Screw in and illuminate LED bulb"
+    },
+    {
+      "source": "yam_arrange_fruits_ours_7_success_rapid_4k_60fps_0916.MOV",
+      "driveFileId": "1Uh2hftEO7KSVGaHx4PL5tiMilbRCTGz-",
+      "sourceIn": 4.8,
+      "sourceOut": 12,
+      "speed": 3,
+      "hdr": true,
+      "action": "Transfer orange from bowl to basket"
+    },
+    {
+      "source": "yam_fold_and_stack_towels_ours_4_success_rapid_4k_60fps_0917.MOV",
+      "driveFileId": "1rLt7ccL3saUO6YAJM8Ueb_-KkjurJzkv",
+      "sourceIn": 12.2,
+      "sourceOut": 19.4,
+      "speed": 3,
+      "hdr": true,
+      "action": "Fold orange towel"
+    },
+    {
+      "source": "tianji+sharpa_arrange_fruits_tong_ours_2_success_rapid_1080p_30fps_0928.MOV",
+      "driveFileId": "1g00cxLrnEWNoKBXyXJwgA9r-89fe5XMH",
+      "sourceIn": 2.1,
+      "sourceOut": 5.7,
+      "speed": 2,
+      "hdr": true,
+      "action": "Grasp pear with tongs"
+    },
+    {
+      "source": "yam_pack_backpack_ours_10_success_rapid_4k_60fps_0916.MOV",
+      "driveFileId": "14MC2NbVYxvKqfy3_XJL8SB8a_69Vp5Sa",
+      "sourceIn": 0.1,
+      "sourceOut": 4.5,
+      "speed": 2,
+      "hdr": true,
+      "action": "Open front-pocket zipper"
+    },
+    {
+      "source": "tianji+sharpa_solve_rubik_cube_ours_2_success_rapid_1080p_30fps_0928.MOV",
+      "driveFileId": "1F_BA6tEPmWY6m7IIGGNnWvuFyUObpSeA",
+      "sourceIn": 0.7,
+      "sourceOut": 7.3,
+      "speed": 3,
+      "hdr": true,
+      "action": "Two-handed cube rotation"
+    },
+    {
+      "source": "tianji+sharpa_arrange_fruits_tong_ours_1_success_rapid_1080p_30fps_0928.MOV",
+      "driveFileId": "1_J0Poa-7kMySrXgclaMJn05Iif7Ad2sk",
+      "sourceIn": 0.3,
+      "sourceOut": 4.5,
+      "speed": 3,
+      "hdr": true,
+      "action": "Lift tongs from holder"
+    },
+    {
+      "source": "yam_pack_backpack_ours_5_success_rapid_4k_60fps_0916.MOV",
+      "driveFileId": "16TtnjmVfOhV8V6dkQlqxLTSP4kVaIlWo",
+      "sourceIn": 1.25,
+      "sourceOut": 7.25,
+      "speed": 3,
+      "hdr": true,
+      "action": "Pick up packaged snack"
+    },
+    {
+      "source": "yam_fold_and_stack_towels_ours_25_success_rapid_4k_60fps_0917.MOV",
+      "driveFileId": "13VrnCY1ehqPGDdo5aMv-QHoy_ATFdiC5",
+      "sourceIn": 6.5,
+      "sourceOut": 13.7,
+      "speed": 3,
+      "hdr": true,
+      "action": "Lift green towel edge"
+    },
+    {
+      "source": "tianji+sharpa_solve_rubik_cube_ours_1_success_rapid_4k_60fps_0928.MOV",
+      "driveFileId": "1Vsj4xW0vQzZ_0Aqu389lwamECSp1ZzZw",
+      "sourceIn": 5.4,
+      "sourceOut": 7.5,
+      "speed": 1.5,
+      "hdr": true,
+      "action": "Reorient cube on tabletop"
+    },
+    {
+      "source": "yam_arrange_fruits_ours_3_success_rapid_4k_60fps_0916.MOV",
+      "driveFileId": "1ghNmJcGkTw3HStFYboIfWdCwYpotdI60",
+      "sourceIn": 37,
+      "sourceOut": 44.2,
+      "speed": 3,
+      "hdr": true,
+      "action": "Lift grapes from bowl"
+    },
+    {
+      "source": "yam_replace_bulb_ours_4_success_rapid_4k_60fps_0915.MOV",
+      "driveFileId": "1QonYblYeCSoTmOnfvmJqtWZwdE7GeBNK",
+      "sourceIn": 8.5,
+      "sourceOut": 15.1,
+      "speed": 3,
+      "hdr": true,
+      "action": "Rotate glass bulb in socket"
+    },
+    {
+      "source": "tianji+sharpa_arrange_fruits_tong_ours_3_success_rapid_1080p_30fps_0928.MOV",
+      "driveFileId": "11kQbDpOQb8CYisTPhNCFW-8PolbZ5jLE",
+      "sourceIn": 0.05,
+      "sourceOut": 4.25,
+      "speed": 2,
+      "hdr": true,
+      "action": "Place pear in basket with tongs"
+    },
+    {
+      "source": "yam_fold_and_stack_towels_ours_28_success_rapid_4k_60fps_0917.MOV",
+      "driveFileId": "1KHBW082tpzizdnFfxmcDWMAVAw3wOr2Y",
+      "sourceIn": 10.2,
+      "sourceOut": 17.4,
+      "speed": 3,
+      "hdr": true,
+      "action": "Carry pink towel toward stack"
+    },
+    {
+      "source": "yam_pack_backpack_ours_1_success_rapid_4k_60fps_0916.MOV",
+      "driveFileId": "1UI3C3JiTpOIeO02XrFMzDdsZmtUEUe2u",
+      "sourceIn": 5,
+      "sourceOut": 11.6,
+      "speed": 3,
+      "hdr": true,
+      "action": "Lift red item at backpack opening"
+    },
+    {
+      "source": "yam_arrange_fruits_ours_8_success_rapid_4k_60fps_0916.MOV",
+      "driveFileId": "1-qEvwBWV9S4nfDuCXktzR5CAIgRP6bzF",
+      "sourceIn": 29.6,
+      "sourceOut": 36.8,
+      "speed": 3,
+      "hdr": true,
+      "action": "Move pear from basket to bowl"
+    },
+    {
+      "source": "yam_fold_and_stack_towels_ours_16_success_rapid_4k_60fps_0917.MOV",
+      "driveFileId": "1hsHqjOnQLSZmZDwsOpDNKi3kklZufOWt",
+      "sourceIn": 22.2,
+      "sourceOut": 29.4,
+      "speed": 3,
+      "hdr": true,
+      "action": "Complete multicolored towel stack"
+    },
+    {
+      "source": "yam_replace_bulb_ours_6_success_rapid_1080p_30fps_0916.MOV",
+      "driveFileId": "1uPJdSzHU7j3uMO0RehChI7VJRKTDLmCh",
+      "sourceIn": 15,
+      "sourceOut": 22.2,
+      "speed": 3,
+      "hdr": true,
+      "action": "Light bulb turns on, wider view"
+    },
+    {
+      "source": "yam_arrange_fruits_ours_4_success_rapid_4k_60fps_0916.MOV",
+      "driveFileId": "1B7MOjk0GWQPjvvYiVDzV-wWS7UzKSHLf",
+      "sourceIn": 0.25,
+      "sourceOut": 5.65,
+      "speed": 3,
+      "hdr": true,
+      "action": "Press completion button"
+    }
+  ]
+}

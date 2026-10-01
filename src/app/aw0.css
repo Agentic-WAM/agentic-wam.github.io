@@ -550,6 +550,13 @@ video.fig-img { background: #000; }
   box-shadow: 0 10px 34px rgba(0, 0, 0, 0.2);
 }
 .demo-gallery__video { display: block; width: 100%; height: auto; background: #000; }
+/* Keep playback controls clear of the film's code card and speed annotation. */
+.video-player[data-controls-placement="below"] .video-player__bar {
+  position: relative;
+  background: #101820;
+  opacity: 1;
+  pointer-events: auto;
+}
 .figure-page .article-shell .demo-desc {
   margin: 16px 0 0;
   padding-left: 16px;

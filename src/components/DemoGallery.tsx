@@ -7,10 +7,12 @@ import { DEMOS, PLATFORM_LABEL, type Platform } from "@/data/aw0";
 import { asset } from "@/lib/asset";
 
 const PLATFORMS: Platform[] = ["yam", "sharpa"];
+// Invalidate cached copies when the rendered demo speed changes.
+const MEDIA_VERSION = "uniform-speed-3x";
 
 // Demonstration gallery (as on the T-Rex page): pick one of the 8 real-world
-// tasks to watch an AW-0 rollout; the player has play/pause, 1–8× speed, a
-// scrubber and a full-screen button. Tasks without a clip yet show a placeholder.
+// tasks to watch its full annotated recording at a uniform 3× recorded speed.
+// The external player stays at 1× so the speed is not applied twice.
 export default function DemoGallery() {
   const [activeId, setActiveId] = useState(DEMOS[0].id);
   const task = useMemo(() => DEMOS.find((t) => t.id === activeId) ?? DEMOS[0], [activeId]);
@@ -42,7 +44,17 @@ export default function DemoGallery() {
 
       {task.video ? (
         <div className="demo-gallery__player" key={task.id}>
-          <VideoPlayer autoPlay className="demo-gallery__video" loop playbackRate={1} src={asset(task.video)} title={task.label} />
+          <VideoPlayer
+            allowSpeedChange={false}
+            autoPlay
+            className="demo-gallery__video"
+            controlsPlacement="below"
+            loop
+            playbackRate={1}
+            poster={task.poster ? `${asset(task.poster)}?v=${MEDIA_VERSION}` : undefined}
+            src={`${asset(task.video)}?v=${MEDIA_VERSION}`}
+            title={task.label}
+          />
         </div>
       ) : (
         <div aria-label={`${task.label} rollout coming soon`} className="aw-video-slot" key={task.id} role="img">

@@ -13,14 +13,14 @@ export const LINKS = {
 // the paper is posted; while it is null the Citation section is not rendered.
 export const BIBTEX: string | null = null;
 
-// Full overview video (~3 min, like T-Rex's teaser_full.mp4), shown right under
-// the title block with player controls. While it is null a placeholder marks
-// its spot. Put the file in public/videos/ and set e.g. "/videos/overview.mp4".
-export const OVERVIEW_VIDEO: string | null = null;
+// Full project film, shown below the abstract with native playback controls.
+export const OVERVIEW_VIDEO = "/videos/overview.mp4";
+export const OVERVIEW_POSTER = "/videos/posters/overview.jpg";
 
-// Hero teaser video (like T-Rex's hero_short.mp4). While it is null the hero
-// shows a muted mosaic of the eight real-world task episodes instead.
-export const HERO_VIDEO: string | null = null;
+// Silent rapid-cut hero, assembled from the dedicated rapid camera clips.
+// Set to null to restore the task-episode mosaic.
+export const HERO_VIDEO: string | null = "/videos/hero-rapid-cut.mp4?v=3-sdr-highlights";
+export const HERO_POSTER = "/videos/posters/hero-rapid-cut.jpg?v=3-sdr-highlights";
 
 // ---------------------------------------------------------------------------
 // Authors (order, marks and affiliations as in the arXiv title block).
@@ -157,21 +157,21 @@ export const LATENCY = [
 ];
 
 // ---------------------------------------------------------------------------
-// Demonstrations: one AW-0 policy rollout per real-world task (like T-Rex's
-// demo gallery). Put the clips in public/videos/demos/ and set `video`, e.g.
-// "/videos/demos/arrange_fruits.mp4"; `instruction` is the language command of
-// that rollout. A task whose video is null shows a "coming soon" placeholder.
+// Full camera recordings at uniform 3x speed, with the project film's title,
+// instruction, and code-card design. Code timings are divided by 3 as well.
+// On-screen badges read 3x; the external player stays at 1x. Instructions, timings,
+// and code stages are recorded in public/videos/media-manifest.json.
 // ---------------------------------------------------------------------------
-export type DemoTask = { id: string; label: string; platform: Platform; video: string | null; instruction: string | null };
+export type DemoTask = { id: string; label: string; platform: Platform; video: string | null; poster?: string; instruction: string | null };
 export const DEMOS: DemoTask[] = [
-  { id: "arrange_fruits", label: "Arrange Fruits", platform: "yam", video: null, instruction: null },
-  { id: "pack_backpack", label: "Pack Backpack", platform: "yam", video: null, instruction: null },
-  { id: "replace_lightbulb", label: "Replace Lightbulb", platform: "yam", video: null, instruction: null },
-  { id: "fold_and_stack_towels", label: "Fold and Stack Towels", platform: "yam", video: null, instruction: null },
-  { id: "arrange_fruits_with_tongs", label: "Arrange Fruits with Tongs", platform: "sharpa", video: null, instruction: null },
-  { id: "deal_poker", label: "Deal Poker", platform: "sharpa", video: null, instruction: null },
-  { id: "flip_scoreboard", label: "Flip Scoreboard", platform: "sharpa", video: null, instruction: null },
-  { id: "solve_rubiks_cube", label: "Solve Rubik's Cube", platform: "sharpa", video: null, instruction: null },
+  { id: "arrange_fruits", label: "Arrange Fruits", platform: "yam", video: "/videos/demos/arrange_fruits.mp4", poster: "/videos/posters/arrange_fruits.jpg", instruction: null },
+  { id: "pack_backpack", label: "Pack Backpack", platform: "yam", video: "/videos/demos/pack_backpack.mp4", poster: "/videos/posters/pack_backpack.jpg", instruction: null },
+  { id: "replace_lightbulb", label: "Replace Lightbulb", platform: "yam", video: "/videos/demos/replace_lightbulb.mp4", poster: "/videos/posters/replace_lightbulb.jpg", instruction: null },
+  { id: "fold_and_stack_towels", label: "Fold and Stack Towels", platform: "yam", video: "/videos/demos/fold_and_stack_towels.mp4", poster: "/videos/posters/fold_and_stack_towels.jpg", instruction: null },
+  { id: "arrange_fruits_with_tongs", label: "Arrange Fruits with Tongs", platform: "sharpa", video: "/videos/demos/arrange_fruits_with_tongs.mp4", poster: "/videos/posters/arrange_fruits_with_tongs.jpg", instruction: null },
+  { id: "deal_poker", label: "Deal Poker", platform: "sharpa", video: "/videos/demos/deal_poker.mp4", poster: "/videos/posters/deal_poker.jpg", instruction: null },
+  { id: "flip_scoreboard", label: "Flip Scoreboard", platform: "sharpa", video: "/videos/demos/flip_scoreboard.mp4", poster: "/videos/posters/flip_scoreboard.jpg", instruction: null },
+  { id: "solve_rubiks_cube", label: "Solve Rubik's Cube", platform: "sharpa", video: "/videos/demos/solve_rubiks_cube.mp4", poster: "/videos/posters/solve_rubiks_cube.jpg", instruction: null },
 ];
 
 // ---------------------------------------------------------------------------
