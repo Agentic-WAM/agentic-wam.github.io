@@ -34,7 +34,7 @@ const outlineItems: { href: string; label: string; level?: number }[] = [
   { href: "#abstract", label: "Abstract" },
   { href: "#overview", label: "Full video", level: 2 },
   { href: "#contributions", label: "Contributions" },
-  { href: "#method", label: "Agentic World Action Model" },
+  { href: "#method", label: "AgenticWorld Action Models" },
   { href: "#joint-denoising", label: "Joint denoising", level: 2 },
   { href: "#annotation", label: "Agentic code annotation", level: 2 },
   { href: "#skills", label: "Skill library", level: 2 },
@@ -159,8 +159,8 @@ function ArticleContent() {
         <article className="article-shell">
           <header className="article-title-block" id="article-title">
             <h1>
-              <span>AW-0: Agentic</span>
-              <span>World Action Model</span>
+              <span>AW-0: AgenticWorld</span>{" "}
+              <span>Action Models</span>
             </h1>
             <div className="article-authors" aria-label="Authors and affiliations">
               <p className="article-authors__names">
@@ -238,7 +238,7 @@ function ArticleContent() {
               preload="none"
               src={asset(OVERVIEW_VIDEO)}
             />
-            <figcaption><b>AW-0: Agentic World Action Model.</b> Full project video.</figcaption>
+            <figcaption><b>AW-0: AgenticWorld Action Models.</b> Full project video.</figcaption>
           </figure>
 
           {/* ---- Contributions ---- */}
@@ -258,8 +258,7 @@ function ArticleContent() {
             </li>
             <li>
               <strong>A dataset of structured skill programs</strong> — 2,913 hours of robot and egocentric human
-              demonstrations annotated with aligned programs, written against a frozen library of 50 skills.{" "}
-              <mark className="aw-tbd">(to be determined)</mark>
+              demonstrations annotated with aligned programs, written against a frozen library of 50 skills.
             </li>
             <li>
               <strong>A hybrid execution policy</strong> — at every replanning point it either invokes the generated program
@@ -268,7 +267,7 @@ function ArticleContent() {
           </ul>
 
           {/* ---- Method ---- */}
-          <h2 id="method">Agentic World Action Model</h2>
+          <h2 id="method">AgenticWorld Action Models</h2>
           <p>
             AW-0 is a single conditional generative model over code, video, and actions. A skill program is a discrete token
             sequence <i>C</i>

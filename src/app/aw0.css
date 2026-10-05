@@ -898,18 +898,6 @@ video.fig-img { background: #000; }
 .bibtex__copy:hover { background: var(--aw-accent-soft); border-color: var(--aw-accent-bright); }
 
 
-/* ---- editorial flag for content still being decided (e.g. "(to be determined)") */
-.figure-page .article-shell mark.aw-tbd {
-  padding: 1px 6px;
-  border-radius: 4px;
-  /* red, deliberately unlike the gold accent, so it reads as a to-do */
-  background: rgba(214, 48, 49, 0.12);
-  border: 1px solid rgba(214, 48, 49, 0.35);
-  color: #b3261e;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
 /* ---- expert colour words in running text ------------------------------------ */
 .xp { font-weight: 600; }
 .xp--code { color: var(--aw-code); }

@@ -29,7 +29,7 @@ export const HERO_POSTER = "/videos/posters/hero-rapid-cut.jpg?v=3-sdr-highlight
 export type Author = { name: string; marks: string; url: string | null };
 export const AUTHORS: Author[] = [
   { name: "Zhuoyang Liu", marks: "1*", url: "https://zhuoyang-liu.github.io/" },
-  { name: "Dantong Niu", marks: "1,2*‡", url: "https://dantong88.github.io/" },
+  { name: "Dantong Niu", marks: "1,2*†", url: "https://dantong88.github.io/" },
   { name: "Botong Zhang", marks: "3*", url: null },
   { name: "Boning Shao", marks: "1*", url: "https://www.linkedin.com/in/boning-shao/" },
   { name: "Jing Wang", marks: "2", url: "https://scholar.google.com/citations?hl=en&user=cdL5PqgAAAAJ" },
@@ -42,7 +42,7 @@ export const AUTHORS: Author[] = [
   { name: "Yutong Bai", marks: "1", url: "https://yutongbai.com/" },
   { name: "Ken Goldberg", marks: "1", url: "https://www2.eecs.berkeley.edu/Faculty/Homepages/goldberg.html" },
   { name: "Danfei Xu", marks: "2", url: "https://faculty.cc.gatech.edu/~danfei/" },
-  { name: "Yuke Zhu", marks: "2", url: "https://yukezhu.me/" },
+  { name: "Yuke Zhu", marks: "2†", url: "https://yukezhu.me/" },
   { name: "Guanzhi Wang", marks: "2†", url: null },
   { name: "Linxi “Jim” Fan", marks: "2†", url: "https://jimfan.me/" },
   { name: "Trevor Darrell", marks: "1†", url: "https://people.eecs.berkeley.edu/~trevor/" },
@@ -57,7 +57,6 @@ export const AFFILIATIONS = [
 export const AUTHOR_NOTES = [
   { mark: "*", label: "Equal contribution" },
   { mark: "†", label: "Equal advising" },
-  { mark: "‡", label: "Project leader" },
 ];
 
 // TODO: add a University of Pennsylvania logo to public/images/logos/ and list it here.

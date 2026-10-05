@@ -20,7 +20,7 @@ const sigmaAt = (k: number) => {
 };
 
 const CODE = `# intruder: move it out of the left bowl to the right side
-approach_best_grasp(robot, item, 'either', [0.0, 0.0, -0.05])
+approach_best_grasp(robot, item, 'banana', [0.0, 0.0, -0.05])
 robot.close_gripper('auto')
 relocate_object(robot, item, 'right side')
 robot.open_gripper('auto')`;
