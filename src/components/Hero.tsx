@@ -217,9 +217,7 @@ export default function Hero() {
               </span>
             ))}
           </div>
-          <p className="hero-tagline">
-            Agentic <em>World Action</em> Model
-          </p>
+          <p className="hero-tagline">Agentic World Action Models</p>
         </div>
         {/* Always visible, including on the clean first screen, so visitors know to scroll. */}
         <a className="scroll-cue" href="#article-content">

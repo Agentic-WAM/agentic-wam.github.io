@@ -6,7 +6,8 @@
 // ---------------------------------------------------------------------------
 export const LINKS = {
   paper: null as string | null, // TODO: arXiv abs URL once the paper is posted
-  code: null as string | null, // TODO: GitHub repository URL
+  model: "https://huggingface.co/miniFranka/agentic-wam-pretrain-yamego3k-soup-e1",
+  code: "https://github.com/ZhuoyangLiu2005/agentic-wam",
 };
 
 // BibTeX shown in the Citation section. Paste arXiv's exported entry here once
@@ -14,8 +15,8 @@ export const LINKS = {
 export const BIBTEX: string | null = null;
 
 // Full project film, shown below the abstract with native playback controls.
-export const OVERVIEW_VIDEO = "/videos/overview.mp4";
-export const OVERVIEW_POSTER = "/videos/posters/overview.jpg";
+export const OVERVIEW_VIDEO = "/videos/overview.mp4?v=10";
+export const OVERVIEW_POSTER = "/videos/posters/overview.jpg?v=10";
 
 // Silent rapid-cut hero, assembled from the dedicated rapid camera clips.
 // Set to null to restore the task-episode mosaic.
@@ -31,19 +32,19 @@ export const AUTHORS: Author[] = [
   { name: "Zhuoyang Liu", marks: "1*", url: "https://zhuoyang-liu.github.io/" },
   { name: "Dantong Niu", marks: "1,2*†", url: "https://dantong88.github.io/" },
   { name: "Botong Zhang", marks: "3*", url: null },
-  { name: "Boning Shao", marks: "1*", url: "https://www.linkedin.com/in/boning-shao/" },
+  { name: "Boning Shao", marks: "1*", url: "https://boning-shao.github.io/" },
   { name: "Jing Wang", marks: "2", url: "https://scholar.google.com/citations?hl=en&user=cdL5PqgAAAAJ" },
   { name: "Ruijie Zheng", marks: "2", url: "https://ruijiezheng.com/" },
   { name: "Yuvan Sharma", marks: "2", url: "https://yuvansharma.github.io/" },
-  { name: "Runyu Lu", marks: "2", url: null },
-  { name: "Jiaming Liu", marks: "2", url: null },
+  { name: "Runyu Lu", marks: "2", url: "https://runyulu.com/" },
+  { name: "Jiaming Liu", marks: "2", url: "https://liujiaming1996.github.io/" },
   { name: "Renrui Zhang", marks: "3", url: null },
   { name: "Roei Herzig", marks: "1", url: "https://roeiherz.github.io/" },
   { name: "Yutong Bai", marks: "1", url: "https://yutongbai.com/" },
   { name: "Ken Goldberg", marks: "1", url: "https://www2.eecs.berkeley.edu/Faculty/Homepages/goldberg.html" },
   { name: "Danfei Xu", marks: "2", url: "https://faculty.cc.gatech.edu/~danfei/" },
   { name: "Yuke Zhu", marks: "2†", url: "https://yukezhu.me/" },
-  { name: "Guanzhi Wang", marks: "2†", url: null },
+  { name: "Guanzhi Wang", marks: "2†", url: "https://guanzhi.me/" },
   { name: "Linxi “Jim” Fan", marks: "2†", url: "https://jimfan.me/" },
   { name: "Trevor Darrell", marks: "1†", url: "https://people.eecs.berkeley.edu/~trevor/" },
 ];
@@ -59,10 +60,10 @@ export const AUTHOR_NOTES = [
   { mark: "†", label: "Equal advising" },
 ];
 
-// TODO: add a University of Pennsylvania logo to public/images/logos/ and list it here.
 export const LOGOS = [
   { alt: "UC Berkeley", src: "/images/logos/uc-berkeley-logo.png", w: 1064, h: 214 },
   { alt: "NVIDIA", src: "/images/logos/nvidia-logo.png", w: 2756, h: 540 },
+  { alt: "University of Pennsylvania", src: "/images/logos/upenn-logo.png", w: 1024, h: 334, className: "article-logo-row__image--penn" },
 ];
 
 // ---------------------------------------------------------------------------

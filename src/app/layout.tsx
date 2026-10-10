@@ -18,7 +18,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AW-0: AgenticWorld Action Models",
+  title: "Agentic World Action Models",
   description:
     "AW-0 is an agentic world action model that jointly denoises skill programs, future video, and robot actions in one mixture-of-transformers, with an agentic pipeline that labels robot and human demonstrations with programs and distills reusable skills.",
   icons: {

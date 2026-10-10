@@ -1,12 +1,14 @@
 "use client";
 
-import { Code, FileText, List, X } from "lucide-react";
+import { Box, Code, FileText, List, X } from "lucide-react";
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
 import Hero from "@/components/Hero";
 import DemoGallery from "@/components/DemoGallery";
 import ZoomableImage from "@/components/ZoomableImage";
+import VideoPlayer from "@/components/VideoPlayer";
 import JointDenoisingDemo from "@/components/JointDenoisingDemo";
+import AnnotationPipeline from "@/components/AnnotationPipeline";
 import SkillExplorer from "@/components/SkillExplorer";
 import FailureExplorer from "@/components/FailureExplorer";
 import CitationBibtex from "@/components/CitationBibtex";
@@ -34,7 +36,7 @@ const outlineItems: { href: string; label: string; level?: number }[] = [
   { href: "#abstract", label: "Abstract" },
   { href: "#overview", label: "Full video", level: 2 },
   { href: "#contributions", label: "Contributions" },
-  { href: "#method", label: "AgenticWorld Action Models" },
+  { href: "#method", label: "Agentic World Action Models" },
   { href: "#joint-denoising", label: "Joint denoising", level: 2 },
   { href: "#annotation", label: "Agentic code annotation", level: 2 },
   { href: "#skills", label: "Skill library", level: 2 },
@@ -158,10 +160,7 @@ function ArticleContent() {
         <MobileOutline activeHref={activeHref} />
         <article className="article-shell">
           <header className="article-title-block" id="article-title">
-            <h1>
-              <span>AW-0: AgenticWorld</span>{" "}
-              <span>Action Models</span>
-            </h1>
+            <h1>Agentic World Action Models</h1>
             <div className="article-authors" aria-label="Authors and affiliations">
               <p className="article-authors__names">
                 {AUTHORS.map((a, i) => (
@@ -198,11 +197,12 @@ function ArticleContent() {
               </p>
               <div className="article-links" aria-label="Resources">
                 <ResourceLink href={LINKS.paper} icon={<FileText aria-hidden="true" size={16} strokeWidth={1.8} />} label="Paper" />
+                <ResourceLink href={LINKS.model} icon={<Box aria-hidden="true" size={16} strokeWidth={1.8} />} label="Model" />
                 <ResourceLink href={LINKS.code} icon={<Code aria-hidden="true" size={16} strokeWidth={1.8} />} label="Code" />
               </div>
               <div className="article-logo-row" aria-label="Institution logos">
                 {LOGOS.map((logo) => (
-                  <Image alt={logo.alt} className="article-logo-row__image" height={logo.h} key={logo.alt} src={asset(logo.src)} unoptimized width={logo.w} />
+                  <Image alt={logo.alt} className={`article-logo-row__image ${logo.className ?? ""}`} height={logo.h} key={logo.alt} src={asset(logo.src)} unoptimized width={logo.w} />
                 ))}
               </div>
             </div>
@@ -238,7 +238,7 @@ function ArticleContent() {
               preload="none"
               src={asset(OVERVIEW_VIDEO)}
             />
-            <figcaption><b>AW-0: AgenticWorld Action Models.</b> Full project video.</figcaption>
+            <figcaption><b>AW-0: Agentic World Action Models.</b> Full project video.</figcaption>
           </figure>
 
           {/* ---- Contributions ---- */}
@@ -267,7 +267,7 @@ function ArticleContent() {
           </ul>
 
           {/* ---- Method ---- */}
-          <h2 id="method">AgenticWorld Action Models</h2>
+          <h2 id="method">Agentic World Action Models</h2>
           <p>
             AW-0 is a single conditional generative model over code, video, and actions. A skill program is a discrete token
             sequence <i>C</i>
@@ -323,13 +323,7 @@ function ArticleContent() {
             contact and motion pattern matches an existing entry, and calls the coding agent only on a cache miss.
           </p>
           <figure className="aw-figure">
-            <ZoomableImage
-              alt="Automatic annotation pipeline"
-              className="fig-img fig-img--pad"
-              height={1597}
-              src={asset("/figures/annotation_pipeline.webp")}
-              width={2400}
-            />
+                <AnnotationPipeline />
             <figcaption>
               Figure 3: <b>Automatic annotation pipeline.</b> Coding agents generate subtask-level programs using predefined
               primitive APIs and available skills, while a coordinator distills recurring patterns into a library of
@@ -532,14 +526,20 @@ function ArticleContent() {
             bowl&rdquo;</i>, AW-0 directs the predicted interaction toward the mango, Subgoal hesitates between the apple and
             the mango, and 2-expert goes for the apple.
           </p>
-          <figure className="aw-figure">
-            <ZoomableImage
-              alt="Future-frame prediction on Arrange Fruits"
-              className="fig-img fig-img--pad"
-              height={897}
-              src={asset("/figures/video_pred_arrange_fruits.webp")}
-              width={2600}
-            />
+          <figure className="aw-figure" id="prediction-arrange-fruits">
+            <div className="demo-gallery__player">
+              <VideoPlayer
+                allowSpeedChange={false}
+                autoPlay
+                className="demo-gallery__video"
+                controlsPlacement="below"
+                loop
+                playbackRate={1}
+                poster={asset("/videos/posters/future_arrange_fruits_v3.jpg")}
+                src={asset("/videos/future-predictions/arrange_fruits_v3.mp4")}
+                title="Arrange Fruits future prediction"
+              />
+            </div>
             <figcaption>Figure 12: Future-frame prediction on <i>Arrange Fruits</i> for three models.</figcaption>
           </figure>
           <p>
@@ -548,14 +548,20 @@ function ArticleContent() {
             and distortion around the hand and card. Explicit skill calls and object arguments give the video expert a more
             specific condition, and the action expert in turn reads more reliable predictive features.
           </p>
-          <figure className="aw-figure">
-            <ZoomableImage
-              alt="Future-frame prediction on Deal Poker"
-              className="fig-img fig-img--pad"
-              height={897}
-              src={asset("/figures/video_pred_deal_poker.webp")}
-              width={2600}
-            />
+          <figure className="aw-figure" id="prediction-deal-poker">
+            <div className="demo-gallery__player">
+              <VideoPlayer
+                allowSpeedChange={false}
+                autoPlay
+                className="demo-gallery__video"
+                controlsPlacement="below"
+                loop
+                playbackRate={1}
+                poster={asset("/videos/posters/future_deal_poker_v4.jpg")}
+                src={asset("/videos/future-predictions/deal_poker_v4.mp4")}
+                title="Deal Poker future prediction"
+              />
+            </div>
             <figcaption>Figure 13: Future-frame prediction on <i>Deal Poker</i> for three models.</figcaption>
           </figure>
 

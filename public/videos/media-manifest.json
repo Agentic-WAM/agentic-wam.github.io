@@ -3,11 +3,11 @@
   "videos": [
     {
       "id": "overview",
-      "source": "AW-0_Project_Film_v7_1080p.mp4",
+      "source": "AW-0_Project_Film_v10_1080p.mp4",
       "video": "/videos/overview.mp4",
       "poster": "/videos/posters/overview.jpg",
-      "durationSeconds": 427.37,
-      "bytes": 69510158
+      "durationSeconds": 457.37,
+      "bytes": 70796005
     },
     {
       "id": "arrange_fruits",
@@ -899,6 +899,28 @@
           "outputFrames": 54
         }
       ]
+    },
+    {
+      "id": "future_prediction_arrange_fruits",
+      "source": "future_prediction_comparisons_v4/AW-0_Future_Prediction_Arrange_Fruits_v3_1080p.mp4",
+      "video": "/videos/future-predictions/arrange_fruits_v3.mp4",
+      "poster": "/videos/posters/future_arrange_fruits_v3.jpg",
+      "durationSeconds": 16.0,
+      "bytes": 5715437,
+      "playerPlaybackRate": 1,
+      "sourceCopiedWithoutReencoding": true,
+      "sha256": "6525d6895b635863cabb8e82d169b6c4c54b16945b8b21a3dc37d6e0a294baba"
+    },
+    {
+      "id": "future_prediction_deal_poker",
+      "source": "future_prediction_comparisons_v4/AW-0_Future_Prediction_Deal_Poker_v4_1080p.mp4",
+      "video": "/videos/future-predictions/deal_poker_v4.mp4",
+      "poster": "/videos/posters/future_deal_poker_v4.jpg",
+      "durationSeconds": 12.0,
+      "bytes": 5500857,
+      "playerPlaybackRate": 1,
+      "sourceCopiedWithoutReencoding": true,
+      "sha256": "afd447129c6a30061e024b6f1940d7cb64ecd4601c44ccdf5d0172d91fa2d4c4"
     }
   ]
 }
