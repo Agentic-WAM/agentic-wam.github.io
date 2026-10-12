@@ -50,7 +50,7 @@ const outlineItems: { href: string; label: string; level?: number }[] = [
   { href: "#failures", label: "Failure cases" },
   { href: "#limitations", label: "Limitations" },
   { href: "#conclusion", label: "Conclusion" },
-  ...(BIBTEX ? [{ href: "#citation", label: "Citation" }] : []),
+  { href: "#citation", label: "Citation" },
 ];
 
 function Outline({ activeHref }: { activeHref: string }) {
@@ -255,10 +255,6 @@ function ArticleContent() {
             <li>
               <strong>An automated agentic annotation pipeline</strong> — coding agents label robot and egocentric human
               demonstrations with aligned programs and distill recurring routines into reusable skills.
-            </li>
-            <li>
-              <strong>A dataset of structured skill programs</strong> — 2,913 hours of robot and egocentric human
-              demonstrations annotated with aligned programs, written against a frozen library of 50 skills.
             </li>
             <li>
               <strong>A hybrid execution policy</strong> — at every replanning point it either invokes the generated program
@@ -522,9 +518,9 @@ function ArticleContent() {
           <p>
             Does the code stream change what the world model predicts? We compare future frames from the right wrist camera
             for AW-0, a variant that plans with natural-language subgoals (Subgoal), and a model without a planning stream
-            (2-expert). For the instruction <i>&ldquo;Arrange the fruits so that finally there is only mango in the left
+            (AW-0 w/o code). For the instruction <i>&ldquo;Arrange the fruits so that finally there is only mango in the left
             bowl&rdquo;</i>, AW-0 directs the predicted interaction toward the mango, Subgoal hesitates between the apple and
-            the mango, and 2-expert goes for the apple.
+            the mango, and AW-0 w/o code goes for the apple.
           </p>
           <figure className="aw-figure" id="prediction-arrange-fruits">
             <div className="demo-gallery__player">
@@ -544,9 +540,9 @@ function ArticleContent() {
           </figure>
           <p>
             On the final stage of <i>Deal Poker</i>, where the right hand inserts a card into a narrow slot, AW-0 predicts the
-            card aligning with and entering the slot, while Subgoal and 2-expert produce less coherent insertions with blur
-            and distortion around the hand and card. Explicit skill calls and object arguments give the video expert a more
-            specific condition, and the action expert in turn reads more reliable predictive features.
+            card aligning with and entering the slot, while Subgoal and AW-0 w/o code produce less coherent insertions with
+            blur and distortion around the hand and card. Explicit skill calls and object arguments give the video expert a
+            more specific condition, and the action expert in turn reads more reliable predictive features.
           </p>
           <figure className="aw-figure" id="prediction-deal-poker">
             <div className="demo-gallery__player">
@@ -604,14 +600,17 @@ function ArticleContent() {
             interact with and learn from their environments.
           </p>
 
-          {/* ---- Citation (shown once BIBTEX is set in src/data/aw0.ts) ---- */}
+          {/* ---- Citation: BibTeX from src/data/aw0.ts; flagged TBD until the arXiv release ---- */}
+          <h2 id="citation">Citation</h2>
+          <p>If you find this work useful, please cite:</p>
           {BIBTEX ? (
-            <>
-              <h2 id="citation">Citation</h2>
-              <p>If you find this work useful, please cite:</p>
-              <CitationBibtex />
-            </>
-          ) : null}
+            <CitationBibtex />
+          ) : (
+            <div className="bibtex bibtex--tbd">
+              <mark className="aw-tbd">BibTeX (to be determined)</mark>
+              <span>It will be added here once the paper is released on arXiv.</span>
+            </div>
+          )}
           <p style={{ fontSize: 15, color: "var(--aw-muted)", marginTop: 48 }}>
             This project page is built on the open-source{" "}
             <a href="https://github.com/enpire-research/enpire-research.github.io" rel="noopener noreferrer" target="_blank">

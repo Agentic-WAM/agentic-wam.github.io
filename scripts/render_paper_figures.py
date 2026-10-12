@@ -22,8 +22,6 @@ JOBS = [  # (source pdf, output name, target width in px)
     ("code_label_pipeline_v2_0926.pdf", "annotation_pipeline", 2400),
     ("appendix/failure_analysis.pdf", "failure_analysis", 2600),
     ("appendix/real_hybrid_progress.pdf", "hybrid_fold_towels", 2600),
-    ("video_quality_comparison.pdf", "video_pred_arrange_fruits", 2600),
-    ("video_quality_comparison_deal_poker.pdf", "video_pred_deal_poker", 2600),
     ("appendix/blocks_ranking_rgb_progress.pdf", "hybrid_blocks_ranking_rgb", 2600),
     ("appendix/pick_dual_bottles_progress.pdf", "hybrid_pick_dual_bottles", 2600),
 ]

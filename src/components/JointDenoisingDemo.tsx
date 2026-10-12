@@ -20,9 +20,9 @@ const sigmaAt = (k: number) => {
 };
 
 const CODE = `# intruder: move it out of the left bowl to the right side
-approach_best_grasp(robot, item, 'banana', [0.0, 0.0, -0.05])
+approach_best_grasp(robot, 'orange', 'either', [0.0, 0.0, -0.05])
 robot.close_gripper('auto')
-relocate_object(robot, item, 'right side')
+relocate_object(robot, 'orange', 'right side')
 robot.open_gripper('auto')`;
 
 const FRAMES = ["/figures/denoise/frame_1.2.jpg", "/figures/denoise/frame_2.0.jpg", "/figures/denoise/frame_2.8.jpg"];
