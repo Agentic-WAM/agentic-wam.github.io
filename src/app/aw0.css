@@ -77,13 +77,17 @@
   color: var(--aw-muted);
 }
 .figure-page[data-theme="day"] .article-logo-row__image {
-  /* Account for Penn's 1.2x height when fitting all three logos on narrow screens. */
-  --logo-height: min(30px, calc((100cqw - 2 * var(--logo-gap)) / 13.76));
+  /* Fit all four logos, including Penn's 1.2x and Ontos's 1.6x image heights. */
+  --logo-height: min(30px, calc((100cqw - 3 * var(--logo-gap)) / 18.52));
   height: var(--logo-height);
   mix-blend-mode: multiply;
 }
 .figure-page[data-theme="day"] .article-logo-row__image--penn {
   height: calc(var(--logo-height) * 1.2);
+}
+.figure-page[data-theme="day"] .article-logo-row__image--ontos {
+  /* Balance the artwork with the other logos despite the supplied image's white margins. */
+  height: calc(var(--logo-height) * 1.6);
 }
 
 /* Keep the full title on one line, scaling it to the available column width. */

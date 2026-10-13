@@ -40,19 +40,20 @@ export const AUTHORS: Author[] = [
   { name: "Jiaming Liu", marks: "2", url: "https://liujiaming1996.github.io/" },
   { name: "Renrui Zhang", marks: "3", url: null },
   { name: "Roei Herzig", marks: "1", url: "https://roeiherz.github.io/" },
-  { name: "Yutong Bai", marks: "1", url: "https://yutongbai.com/" },
+  { name: "Yutong Bai", marks: "1,4", url: "https://yutongbai.com/" },
   { name: "Ken Goldberg", marks: "1", url: "https://www2.eecs.berkeley.edu/Faculty/Homepages/goldberg.html" },
   { name: "Danfei Xu", marks: "2", url: "https://faculty.cc.gatech.edu/~danfei/" },
   { name: "Yuke Zhu", marks: "2†", url: "https://yukezhu.me/" },
   { name: "Guanzhi Wang", marks: "2†", url: "https://guanzhi.me/" },
   { name: "Linxi “Jim” Fan", marks: "2†", url: "https://jimfan.me/" },
-  { name: "Trevor Darrell", marks: "1†", url: "https://people.eecs.berkeley.edu/~trevor/" },
+  { name: "Trevor Darrell", marks: "1,4†", url: "https://people.eecs.berkeley.edu/~trevor/" },
 ];
 
 export const AFFILIATIONS = [
   { mark: "1", label: "UC Berkeley" },
   { mark: "2", label: "NVIDIA" },
   { mark: "3", label: "University of Pennsylvania" },
+  { mark: "4", label: "Ontos Inc" },
 ];
 
 export const AUTHOR_NOTES = [
@@ -64,6 +65,7 @@ export const LOGOS = [
   { alt: "UC Berkeley", src: "/images/logos/uc-berkeley-logo.png", w: 1064, h: 214 },
   { alt: "NVIDIA", src: "/images/logos/nvidia-logo.png", w: 2756, h: 540 },
   { alt: "University of Pennsylvania", src: "/images/logos/upenn-logo.png", w: 1024, h: 334, className: "article-logo-row__image--penn" },
+  { alt: "Ontos Inc", src: "/images/logos/ontos-logo.jpg", w: 2640, h: 888, className: "article-logo-row__image--ontos" },
 ];
 
 // ---------------------------------------------------------------------------
