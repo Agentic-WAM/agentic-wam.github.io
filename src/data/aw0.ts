@@ -53,7 +53,7 @@ export const AFFILIATIONS = [
   { mark: "1", label: "UC Berkeley" },
   { mark: "2", label: "NVIDIA" },
   { mark: "3", label: "University of Pennsylvania" },
-  { mark: "4", label: "Ontos Inc" },
+  { mark: "4", label: "Ontos Labs" },
 ];
 
 export const AUTHOR_NOTES = [
@@ -65,7 +65,7 @@ export const LOGOS = [
   { alt: "UC Berkeley", src: "/images/logos/uc-berkeley-logo.png", w: 1064, h: 214 },
   { alt: "NVIDIA", src: "/images/logos/nvidia-logo.png", w: 2756, h: 540 },
   { alt: "University of Pennsylvania", src: "/images/logos/upenn-logo.png", w: 1024, h: 334, className: "article-logo-row__image--penn" },
-  { alt: "Ontos Inc", src: "/images/logos/ontos-logo.jpg", w: 2640, h: 888, className: "article-logo-row__image--ontos" },
+  { alt: "Ontos Labs", src: "/images/logos/ontos-logo.jpg", w: 2640, h: 888, className: "article-logo-row__image--ontos" },
 ];
 
 // ---------------------------------------------------------------------------
