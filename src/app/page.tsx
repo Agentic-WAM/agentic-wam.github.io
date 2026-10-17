@@ -3,11 +3,11 @@
 import { Box, Code, FileText, List, X } from "lucide-react";
 import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import Hero from "@/components/Hero";
 import DemoGallery from "@/components/DemoGallery";
 import ZoomableImage from "@/components/ZoomableImage";
 import VideoPlayer from "@/components/VideoPlayer";
-import JointDenoisingDemo from "@/components/JointDenoisingDemo";
 import AnnotationPipeline from "@/components/AnnotationPipeline";
 import SkillExplorer from "@/components/SkillExplorer";
 import FailureExplorer from "@/components/FailureExplorer";
@@ -52,6 +52,28 @@ const outlineItems: { href: string; label: string; level?: number }[] = [
   { href: "#conclusion", label: "Conclusion" },
   { href: "#citation", label: "Citation" },
 ];
+
+// Muted 1x video that autoplays on loop, with the control bar below the frame.
+function VideoFigure({ id, src, poster, title, caption }: { id?: string; src: string; poster: string; title: string; caption: ReactNode }) {
+  return (
+    <figure className="aw-figure" id={id}>
+      <div className="demo-gallery__player">
+        <VideoPlayer
+          allowSpeedChange={false}
+          autoPlay
+          className="demo-gallery__video"
+          controlsPlacement="below"
+          loop
+          playbackRate={1}
+          poster={asset(poster)}
+          src={asset(src)}
+          title={title}
+        />
+      </div>
+      <figcaption>{caption}</figcaption>
+    </figure>
+  );
+}
 
 function Outline({ activeHref }: { activeHref: string }) {
   return (
@@ -290,6 +312,19 @@ function ArticleContent() {
             robot-state conditioning. Attention is bidirectional within each expert and blockwise causal across experts in
             the order code → video → action.
           </p>
+          <VideoFigure
+            caption={
+              <>
+                Figure 2: <b>Three experts connected by masked attention.</b> The code, video, and action experts share the
+                images, robot state, and instruction. Attention is bidirectional within each expert and blockwise causal
+                across them: code reads code, video reads code and video, and action reads all three.
+              </>
+            }
+            id="architecture-video"
+            poster="/videos/posters/explainer_architecture.jpg"
+            src="/videos/explainers/architecture.mp4"
+            title="AW-0 experts and attention mask"
+          />
 
           <h3 className="article-subsection" id="joint-denoising">
             Joint denoising
@@ -305,7 +340,19 @@ function ArticleContent() {
             pretrained distribution and a uniform one, with importance weights that balance video learning against
             predictive guidance.
           </p>
-          <JointDenoisingDemo figureNumber={2} />
+          <VideoFigure
+            caption={
+              <>
+                Figure 3: <b>Joint denoising.</b> In one denoising loop, the code expert unmasks program tokens by discrete
+                masked diffusion while the future video and the action chunk follow continuous flow matching; the code
+                conditions both the video and the action streams. Schematic of one replanning step.
+              </>
+            }
+            id="joint-denoising-video"
+            poster="/videos/posters/explainer_joint_denoising.jpg"
+            src="/videos/explainers/joint_denoising.mp4"
+            title="Joint denoising of code, video, and action"
+          />
 
           <h3 className="article-subsection" id="annotation">
             Agentic code annotation
@@ -321,12 +368,27 @@ function ArticleContent() {
           <figure className="aw-figure">
                 <AnnotationPipeline />
             <figcaption>
-              Figure 3: <b>Automatic annotation pipeline.</b> Coding agents generate subtask-level programs using predefined
+              Figure 4: <b>Automatic annotation pipeline.</b> Coding agents generate subtask-level programs using predefined
               primitive APIs and available skills, while a coordinator distills recurring patterns into a library of
               reusable skills across tasks. With the library frozen, the corpus is annotated by reusing cached code when
               contact and motion evidence match and generating new labels otherwise.
             </figcaption>
           </figure>
+          <VideoFigure
+            caption={
+              <>
+                Figure 5: <b>The annotation pipeline on a worked example.</b> A YAM blanket-folding demonstration is first
+                written as a structured program. The grasp–fold–release pattern it shares with dishcloth and trousers
+                folding becomes the skill <i>fold_edge_over</i>. With the 50-skill library frozen, a matching demonstration
+                reuses the cached program, and the annotated YAM and egocentric human demonstrations together form the
+                ≈3,000-hour pretraining corpus.
+              </>
+            }
+            id="annotation-example"
+            poster="/videos/posters/explainer_annotation_example.jpg"
+            src="/videos/explainers/annotation_example.mp4"
+            title="Annotation pipeline worked example"
+          />
           <p>
             During training, the code stream is a conditioning prompt followed by the <em>active slice</em>, a short block of
             primitive or skill calls for the current subtask; only the slice is masked and supervised. Because one frame
@@ -337,6 +399,19 @@ function ArticleContent() {
             perception and control primitives whenever it passes stage, dependency, syntax, whitelist, and vacuity checks;
             otherwise the action chunk from the same forward pass drives the robot until the next replan.
           </p>
+          <VideoFigure
+            caption={
+              <>
+                Figure 6: <b>Default and hybrid execution.</b> By default the generated code conditions the action expert,
+                and its action chunk drives the robot. In hybrid mode, a generated program that passes the executability
+                checks runs through the skill primitives; otherwise the action chunk is executed.
+              </>
+            }
+            id="hybrid-execution-video"
+            poster="/videos/posters/explainer_hybrid_execution.jpg"
+            src="/videos/explainers/hybrid_execution.mp4"
+            title="Default and hybrid execution"
+          />
 
           <h3 className="article-subsection" id="skills">
             Skill library
@@ -346,7 +421,7 @@ function ArticleContent() {
             human data. Each skill is a Python function over the primitive API that takes the objects it acts on as
             arguments. 10 representative skills are shown here.
           </p>
-          <SkillExplorer figureNumber={4} />
+          <SkillExplorer figureNumber={7} />
 
           <h3 className="article-subsection" id="training">
             Training recipe
@@ -384,7 +459,7 @@ function ArticleContent() {
             demonstrations per task (2,500 episodes) and are evaluated on the <em>clean</em> setting and on the{" "}
             <em>random</em> setting with randomized backgrounds, textures, lighting, table height, and distractors.
           </p>
-          <RoboTwinBars figureNumber={5} />
+          <RoboTwinBars figureNumber={8} />
           <p>
             AW-0 reaches the highest average success rate, <strong>50.7%</strong>, driven by <strong>80.8%</strong> on the
             clean setting, 16.0 points above the strongest baseline WLA (64.8%). Under visual randomization the default mode
@@ -410,7 +485,7 @@ function ArticleContent() {
               width={2600}
             />
             <figcaption>
-              Figure 6: How code execution and direct actions interleave in hybrid mode. Top, <i>blocks_ranking_rgb</i>: the
+              Figure 9: How code execution and direct actions interleave in hybrid mode. Top, <i>blocks_ranking_rgb</i>: the
               three pick-and-place cycles run almost entirely as code, with direct actions around a stage transition. Bottom,{" "}
               <i>pick_dual_bottles</i>: code localizes a bottle but fails to secure the grasp; direct actions complete the
               grasp, then code resumes. On successful episodes, code drives 14.5% of steps in the clean setting and 35.0% in
@@ -426,6 +501,19 @@ function ArticleContent() {
             two 22-DoF Sharpa dexterous hands. Both observe three RGB views and act in a unified 64-D state–action space.
             Each task is run for 3×16 rollouts under randomized initial object poses and scored with an additive rubric.
           </p>
+          <VideoFigure
+            caption={
+              <>
+                Figure 10: <b>Eight tasks, two embodiments.</b> AW-0 rollouts on the YAM station (tasks 1–4) and the
+                Tianji–Sharpa platform (tasks 5–8), sped up as marked in each clip, followed by the per-task scores of
+                Table 1.
+              </>
+            }
+            id="real-world-video"
+            poster="/videos/posters/explainer_real_world_results.jpg"
+            src="/videos/explainers/real_world_results.mp4"
+            title="Real-world tasks and results"
+          />
           <AverageBars
             caption={
               <>
@@ -433,7 +521,7 @@ function ArticleContent() {
                 strongest baseline (DreamZero, 46.0).
               </>
             }
-            figureNumber={7}
+            figureNumber={11}
             rows={REAL_RESULTS}
           />
           <TaskTable
@@ -475,7 +563,7 @@ function ArticleContent() {
               width={2600}
             />
             <figcaption>
-              Figure 8: Hybrid actions on <i>Fold and Stack Towels</i>. One episode continues from the upper to the lower
+              Figure 12: Hybrid actions on <i>Fold and Stack Towels</i>. One episode continues from the upper to the lower
               row; green marks code execution and purple marks direct actions.
             </figcaption>
           </figure>
@@ -489,7 +577,7 @@ function ArticleContent() {
             Placing code first (<i>C → V → A</i>) lets both video and action generation attend to the plan, so semantic task
             structure shapes future prediction throughout denoising, and gives the best result on 7 of 8 tasks.
           </p>
-          <GroupedBars caption={<>Impact of the code expert and attention order. C, V, and A denote the code, video, and action streams.</>} figureNumber={9} series={ABL_ATTENTION} />
+          <GroupedBars caption={<>Impact of the code expert and attention order. C, V, and A denote the code, video, and action streams.</>} figureNumber={13} series={ABL_ATTENTION} />
           <p>
             A dedicated ViT is also a better visual input for the code expert than reused Wan2.2 VAE features: VAE features
             are built for pixel reconstruction and poorly support the semantic distinctions needed to select and compose
@@ -503,7 +591,7 @@ function ArticleContent() {
             calls also hurts on all 8 tasks, especially on skill-heavy tasks such as <i>Deal Poker</i> (58.3 vs. 42.0), and full
             programs beat natural-language subgoals on 7 of 8 tasks.
           </p>
-          <GroupedBars caption={<>Impact of code label content.</>} figureNumber={10} series={ABL_LABEL} showValues={false} yMin={0} />
+          <GroupedBars caption={<>Impact of code label content.</>} figureNumber={14} series={ABL_LABEL} showValues={false} yMin={0} />
           <p>
             <strong>How does joint denoising affect performance and efficiency?</strong> Compared with generating code
             autoregressively before the video and action (teacher-forced AR), joint denoising wins on 7 of 8 tasks: early AR
@@ -511,7 +599,7 @@ function ArticleContent() {
             is also faster.
           </p>
           <TaskTable caption={<>Table 3: Impact of the code generation paradigm. Average rubric score (%).</>} label="Paradigm" rows={ABL_GENERATION} />
-          <LatencyChart figureNumber={11} />
+          <LatencyChart figureNumber={15} />
 
           {/* ---- Analysis ---- */}
           <h2 id="analysis">What code changes in the predicted future</h2>
@@ -522,49 +610,31 @@ function ArticleContent() {
             bowl&rdquo;</i>, AW-0 directs the predicted interaction toward the mango, Subgoal hesitates between the apple and
             the mango, and AW-0 w/o code goes for the apple.
           </p>
-          <figure className="aw-figure" id="prediction-arrange-fruits">
-            <div className="demo-gallery__player">
-              <VideoPlayer
-                allowSpeedChange={false}
-                autoPlay
-                className="demo-gallery__video"
-                controlsPlacement="below"
-                loop
-                playbackRate={1}
-                poster={asset("/videos/posters/future_arrange_fruits_v3.jpg")}
-                src={asset("/videos/future-predictions/arrange_fruits_v3.mp4")}
-                title="Arrange Fruits future prediction"
-              />
-            </div>
-            <figcaption>Figure 12: Future-frame prediction on <i>Arrange Fruits</i> for three models.</figcaption>
-          </figure>
+          <VideoFigure
+            caption={<>Figure 16: Future-frame prediction on <i>Arrange Fruits</i> for three models.</>}
+            id="prediction-arrange-fruits"
+            poster="/videos/posters/future_arrange_fruits_v3.jpg"
+            src="/videos/future-predictions/arrange_fruits_v3.mp4"
+            title="Arrange Fruits future prediction"
+          />
           <p>
             On the final stage of <i>Deal Poker</i>, where the right hand inserts a card into a narrow slot, AW-0 predicts the
             card aligning with and entering the slot, while Subgoal and AW-0 w/o code produce less coherent insertions with
             blur and distortion around the hand and card. Explicit skill calls and object arguments give the video expert a
             more specific condition, and the action expert in turn reads more reliable predictive features.
           </p>
-          <figure className="aw-figure" id="prediction-deal-poker">
-            <div className="demo-gallery__player">
-              <VideoPlayer
-                allowSpeedChange={false}
-                autoPlay
-                className="demo-gallery__video"
-                controlsPlacement="below"
-                loop
-                playbackRate={1}
-                poster={asset("/videos/posters/future_deal_poker_v4.jpg")}
-                src={asset("/videos/future-predictions/deal_poker_v4.mp4")}
-                title="Deal Poker future prediction"
-              />
-            </div>
-            <figcaption>Figure 13: Future-frame prediction on <i>Deal Poker</i> for three models.</figcaption>
-          </figure>
+          <VideoFigure
+            caption={<>Figure 17: Future-frame prediction on <i>Deal Poker</i> for three models.</>}
+            id="prediction-deal-poker"
+            poster="/videos/posters/future_deal_poker_v4.jpg"
+            src="/videos/future-predictions/deal_poker_v4.mp4"
+            title="Deal Poker future prediction"
+          />
 
           {/* ---- Failures ---- */}
           <h2 id="failures">Failure cases</h2>
           <p>Six representative failures show where AW-0 still has headroom:</p>
-          <FailureExplorer figureNumber={14} />
+          <FailureExplorer figureNumber={18} />
 
           {/* ---- Limitations ---- */}
           <h2 id="limitations">Limitations &amp; future work</h2>
