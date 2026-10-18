@@ -957,15 +957,15 @@
       "remuxedForFaststart": true
     },
     {
-      "id": "explainer_hybrid_execution",
-      "source": "AW-0-X-Release-X-Post_2026-10-17/videos/04_Action_and_Hybrid_Execution.mp4",
-      "video": "/videos/explainers/hybrid_execution.mp4",
-      "poster": "/videos/posters/explainer_hybrid_execution.jpg",
-      "durationSeconds": 18.0,
-      "bytes": 1118843,
+      "id": "explainer_hybrid_execution_robotwin",
+      "source": "x_post_6_video/output/x_post_6_hybrid_execution.mp4",
+      "video": "/videos/explainers/hybrid_execution_robotwin.mp4",
+      "poster": "/videos/posters/explainer_hybrid_execution_robotwin.jpg",
+      "durationSeconds": 47.5,
+      "bytes": 5510749,
       "playerPlaybackRate": 1,
       "sourceCopiedWithoutReencoding": true,
-      "sha256": "5c31e10048b55f136487f1150dc4c54c34fd45ae6c2143e4d86fcfcc7e409176"
+      "sha256": "0c8bddceb7d1ba2745abd8369334b1594973476c9082415f40e7177842a8a405"
     },
     {
       "id": "explainer_real_world_results",

@@ -402,15 +402,18 @@ function ArticleContent() {
           <VideoFigure
             caption={
               <>
-                Figure 6: <b>Default and hybrid execution.</b> By default the generated code conditions the action expert,
-                and its action chunk drives the robot. In hybrid mode, a generated program that passes the executability
-                checks runs through the skill primitives; otherwise the action chunk is executed.
+                Figure 6: <b>Hybrid execution on RoboTwin 2.0.</b> A <i>blocks_ranking_rgb</i> rollout in a visually
+                randomized scene, played at 4× speed. By default the generated code only conditions the action chunk,
+                which drives the robot. In hybrid mode the code slice is checked at every replan: if it passes the stage,
+                dependency, and compile checks, it runs through the perception and control APIs; otherwise the action
+                chunk drives the robot. Across the 50 randomized tasks, hybrid execution raises success from 20.6% to
+                29.2%.
               </>
             }
             id="hybrid-execution-video"
-            poster="/videos/posters/explainer_hybrid_execution.jpg"
-            src="/videos/explainers/hybrid_execution.mp4"
-            title="Default and hybrid execution"
+            poster="/videos/posters/explainer_hybrid_execution_robotwin.jpg"
+            src="/videos/explainers/hybrid_execution_robotwin.mp4"
+            title="Hybrid execution on RoboTwin 2.0"
           />
 
           <h3 className="article-subsection" id="skills">
