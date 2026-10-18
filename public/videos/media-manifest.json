@@ -936,13 +936,14 @@
     {
       "id": "explainer_joint_denoising",
       "source": "AW-0-X-Release-X-Post_2026-10-17/videos/02_Joint_Denoising_updated.mp4",
-      "video": "/videos/explainers/joint_denoising.mp4",
-      "poster": "/videos/posters/explainer_joint_denoising.jpg",
+      "video": "/videos/explainers/joint_denoising_v2.mp4",
+      "poster": "/videos/posters/explainer_joint_denoising_v2.jpg",
       "durationSeconds": 18.0,
-      "bytes": 2811544,
+      "bytes": 2784794,
       "playerPlaybackRate": 1,
       "sourceCopiedWithoutReencoding": true,
-      "sha256": "ceb62bd1142101127510315b3d9ef6d39fc4e1509cbd199c589f1ea0d735e0b1"
+      "sha256": "fd0460494c7b66b38aeedcd85d682ceaf99d4a77619e89595c638ae8dc707d80",
+      "sourceUpdated": "2026-10-18"
     },
     {
       "id": "explainer_annotation_example",

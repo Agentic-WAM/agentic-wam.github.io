@@ -349,8 +349,8 @@ function ArticleContent() {
               </>
             }
             id="joint-denoising-video"
-            poster="/videos/posters/explainer_joint_denoising.jpg"
-            src="/videos/explainers/joint_denoising.mp4"
+            poster="/videos/posters/explainer_joint_denoising_v2.jpg"
+            src="/videos/explainers/joint_denoising_v2.mp4"
             title="Joint denoising of code, video, and action"
           />
 
