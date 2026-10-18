@@ -8,7 +8,7 @@ import { useState, useSyncExternalStore } from "react";
 // casual visitors out; it is not access control. To change the password, set PASSWORD_SHA256 to
 // sha256(SALT + new password) in hex. Remove this component (and `robots` in layout.tsx) at launch.
 const SALT = "aw0-preview:";
-const PASSWORD_SHA256 = "9aae1f83d425cb1ee55963555f948a6c573dc3be5a0a79e2da237ae620161c72";
+const PASSWORD_SHA256 = "d5b1c493c319dc4ca0a4dd2bef4f06b131ea88cf26e776ceabd57569b05e5129";
 const STORAGE_KEY = "aw0-preview-unlocked";
 
 async function sha256Hex(text: string) {
