@@ -399,22 +399,6 @@ function ArticleContent() {
             perception and control primitives whenever it passes stage, dependency, syntax, whitelist, and vacuity checks;
             otherwise the action chunk from the same forward pass drives the robot until the next replan.
           </p>
-          <VideoFigure
-            caption={
-              <>
-                Figure 6: <b>Hybrid execution on RoboTwin 2.0.</b> A <i>blocks_ranking_rgb</i> rollout in a visually
-                randomized scene, played at 4× speed. By default the generated code only conditions the action chunk,
-                which drives the robot. In hybrid mode the code slice is checked at every replan: if it passes the stage,
-                dependency, and compile checks, it runs through the perception and control APIs; otherwise the action
-                chunk drives the robot. Across the 50 randomized tasks, hybrid execution raises success from 20.6% to
-                29.2%.
-              </>
-            }
-            id="hybrid-execution-video"
-            poster="/videos/posters/explainer_hybrid_execution_robotwin.jpg"
-            src="/videos/explainers/hybrid_execution_robotwin.mp4"
-            title="Hybrid execution on RoboTwin 2.0"
-          />
 
           <h3 className="article-subsection" id="skills">
             Skill library
@@ -424,7 +408,7 @@ function ArticleContent() {
             human data. Each skill is a Python function over the primitive API that takes the objects it acts on as
             arguments. 10 representative skills are shown here.
           </p>
-          <SkillExplorer figureNumber={7} />
+          <SkillExplorer figureNumber={6} />
 
           <h3 className="article-subsection" id="training">
             Training recipe
@@ -462,7 +446,7 @@ function ArticleContent() {
             demonstrations per task (2,500 episodes) and are evaluated on the <em>clean</em> setting and on the{" "}
             <em>random</em> setting with randomized backgrounds, textures, lighting, table height, and distractors.
           </p>
-          <RoboTwinBars figureNumber={8} />
+          <RoboTwinBars figureNumber={7} />
           <p>
             AW-0 reaches the highest average success rate, <strong>50.7%</strong>, driven by <strong>80.8%</strong> on the
             clean setting, 16.0 points above the strongest baseline WLA (64.8%). Under visual randomization the default mode
@@ -471,30 +455,22 @@ function ArticleContent() {
             and retains 46% of its clean-setting performance under randomization versus 25% for the default mode. The cost
             is on clean scenes, where the hybrid mode (63.1%) is 17.7 points below the default mode.
           </p>
-          <figure className="aw-figure">
-            <ZoomableImage
-              alt="Hybrid execution on blocks_ranking_rgb"
-              className="fig-img"
-              height={471}
-              src={asset("/figures/hybrid_blocks_ranking_rgb.webp")}
-              width={2600}
-            />
-            <div style={{ height: 8 }} />
-            <ZoomableImage
-              alt="Hybrid execution on pick_dual_bottles"
-              className="fig-img"
-              height={471}
-              src={asset("/figures/hybrid_pick_dual_bottles.webp")}
-              width={2600}
-            />
-            <figcaption>
-              Figure 9: How code execution and direct actions interleave in hybrid mode. Top, <i>blocks_ranking_rgb</i>: the
-              three pick-and-place cycles run almost entirely as code, with direct actions around a stage transition. Bottom,{" "}
-              <i>pick_dual_bottles</i>: code localizes a bottle but fails to secure the grasp; direct actions complete the
-              grasp, then code resumes. On successful episodes, code drives 14.5% of steps in the clean setting and 35.0% in
-              the random setting.
-            </figcaption>
-          </figure>
+          <VideoFigure
+            caption={
+              <>
+                Figure 8: <b>Hybrid execution on RoboTwin 2.0.</b> A <i>blocks_ranking_rgb</i> rollout in a visually
+                randomized scene, played at 4× speed. By default the generated code only conditions the action chunk,
+                which drives the robot. In hybrid mode the code slice is checked at every replan: if it passes the stage,
+                dependency, and compile checks, it runs through the perception and control APIs; otherwise the action
+                chunk drives the robot. Across the 50 randomized tasks, hybrid execution raises success from 20.6% to
+                29.2%.
+              </>
+            }
+            id="hybrid-execution-video"
+            poster="/videos/posters/explainer_hybrid_execution_robotwin.jpg"
+            src="/videos/explainers/hybrid_execution_robotwin.mp4"
+            title="Hybrid execution on RoboTwin 2.0"
+          />
 
           {/* ---- Real world ---- */}
           <h2 id="real-world">Real-world experiments</h2>
@@ -507,7 +483,7 @@ function ArticleContent() {
           <VideoFigure
             caption={
               <>
-                Figure 10: <b>Eight tasks, two embodiments.</b> AW-0 rollouts on the YAM station (tasks 1–4) and the
+                Figure 9: <b>Eight tasks, two embodiments.</b> AW-0 rollouts on the YAM station (tasks 1–4) and the
                 Tianji–Sharpa platform (tasks 5–8), sped up as marked in each clip, followed by the per-task scores of
                 Table 1.
               </>
@@ -524,7 +500,7 @@ function ArticleContent() {
                 strongest baseline (DreamZero, 46.0).
               </>
             }
-            figureNumber={11}
+            figureNumber={10}
             rows={REAL_RESULTS}
           />
           <TaskTable
@@ -566,7 +542,7 @@ function ArticleContent() {
               width={2600}
             />
             <figcaption>
-              Figure 12: Hybrid actions on <i>Fold and Stack Towels</i>. One episode continues from the upper to the lower
+              Figure 11: Hybrid actions on <i>Fold and Stack Towels</i>. One episode continues from the upper to the lower
               row; green marks code execution and purple marks direct actions.
             </figcaption>
           </figure>
@@ -580,7 +556,7 @@ function ArticleContent() {
             Placing code first (<i>C → V → A</i>) lets both video and action generation attend to the plan, so semantic task
             structure shapes future prediction throughout denoising, and gives the best result on 7 of 8 tasks.
           </p>
-          <GroupedBars caption={<>Impact of the code expert and attention order. C, V, and A denote the code, video, and action streams.</>} figureNumber={13} series={ABL_ATTENTION} />
+          <GroupedBars caption={<>Impact of the code expert and attention order. C, V, and A denote the code, video, and action streams.</>} figureNumber={12} series={ABL_ATTENTION} />
           <p>
             A dedicated ViT is also a better visual input for the code expert than reused Wan2.2 VAE features: VAE features
             are built for pixel reconstruction and poorly support the semantic distinctions needed to select and compose
@@ -594,7 +570,7 @@ function ArticleContent() {
             calls also hurts on all 8 tasks, especially on skill-heavy tasks such as <i>Deal Poker</i> (58.3 vs. 42.0), and full
             programs beat natural-language subgoals on 7 of 8 tasks.
           </p>
-          <GroupedBars caption={<>Impact of code label content.</>} figureNumber={14} series={ABL_LABEL} showValues={false} yMin={0} />
+          <GroupedBars caption={<>Impact of code label content.</>} figureNumber={13} series={ABL_LABEL} showValues={false} yMin={0} />
           <p>
             <strong>How does joint denoising affect performance and efficiency?</strong> Compared with generating code
             autoregressively before the video and action (teacher-forced AR), joint denoising wins on 7 of 8 tasks: early AR
@@ -602,7 +578,7 @@ function ArticleContent() {
             is also faster.
           </p>
           <TaskTable caption={<>Table 3: Impact of the code generation paradigm. Average rubric score (%).</>} label="Paradigm" rows={ABL_GENERATION} />
-          <LatencyChart figureNumber={15} />
+          <LatencyChart figureNumber={14} />
 
           {/* ---- Analysis ---- */}
           <h2 id="analysis">What code changes in the predicted future</h2>
@@ -614,7 +590,7 @@ function ArticleContent() {
             the mango, and AW-0 w/o code goes for the apple.
           </p>
           <VideoFigure
-            caption={<>Figure 16: Future-frame prediction on <i>Arrange Fruits</i> for three models.</>}
+            caption={<>Figure 15: Future-frame prediction on <i>Arrange Fruits</i> for three models.</>}
             id="prediction-arrange-fruits"
             poster="/videos/posters/future_arrange_fruits_v3.jpg"
             src="/videos/future-predictions/arrange_fruits_v3.mp4"
@@ -627,7 +603,7 @@ function ArticleContent() {
             more specific condition, and the action expert in turn reads more reliable predictive features.
           </p>
           <VideoFigure
-            caption={<>Figure 17: Future-frame prediction on <i>Deal Poker</i> for three models.</>}
+            caption={<>Figure 16: Future-frame prediction on <i>Deal Poker</i> for three models.</>}
             id="prediction-deal-poker"
             poster="/videos/posters/future_deal_poker_v4.jpg"
             src="/videos/future-predictions/deal_poker_v4.mp4"
@@ -637,7 +613,7 @@ function ArticleContent() {
           {/* ---- Failures ---- */}
           <h2 id="failures">Failure cases</h2>
           <p>Six representative failures show where AW-0 still has headroom:</p>
-          <FailureExplorer figureNumber={18} />
+          <FailureExplorer figureNumber={17} />
 
           {/* ---- Limitations ---- */}
           <h2 id="limitations">Limitations &amp; future work</h2>

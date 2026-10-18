@@ -49,7 +49,7 @@ npm run build    # static export to ./out (output: "export" in next.config.ts)
 - `public/figures/annotation` — original embedded photos and agent logos from `code_label_pipeline_v2_0926.pdf`;
   Figure 3's text, cards, and connectors are rendered natively. Content lives in `src/data/annotationPipeline.ts`.
   The Coding Agent's Gemini icon comes from [Gemini's official site](https://gemini.google/images/spark_4c.png).
-- `public/videos/overview.mp4` — the complete 7:37 project film (v10), displayed below the abstract.
+- `public/videos/overview.mp4` — the complete 9:08 project film (v13), displayed below the abstract.
 - `public/videos/hero-rapid-cut.mp4` — a silent 40.9-second opening loop: 19 shots from dedicated rapid clips,
   opening with YAM replacing a lightbulb and covering six tasks across YAM and Tianji + Sharpa. Individual shots use 1.5–3x recorded speed, baked into the
   file; the browser plays at 1x. `scripts/rapid-cut-edit.json` records every source, cut, and speed.

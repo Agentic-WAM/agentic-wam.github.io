@@ -7,7 +7,7 @@
 export const LINKS = {
   paper: null as string | null, // TODO: arXiv abs URL once the paper is posted
   model: "https://huggingface.co/miniFranka/agentic-wam-pretrain-yamego3k-soup-e1",
-  code: null as string | null, // TODO: https://github.com/ZhuoyangLiu2005/agentic-wam once that repository is public
+  code: "https://github.com/Agentic-WAM/agentic-wam.github.io",
 };
 
 // BibTeX shown in the Citation section. Paste arXiv's exported entry here once
@@ -15,8 +15,8 @@ export const LINKS = {
 export const BIBTEX: string | null = null;
 
 // Full project film, shown below the abstract with native playback controls.
-export const OVERVIEW_VIDEO = "/videos/overview.mp4?v=10";
-export const OVERVIEW_POSTER = "/videos/posters/overview.jpg?v=10";
+export const OVERVIEW_VIDEO = "/videos/overview.mp4?v=13";
+export const OVERVIEW_POSTER = "/videos/posters/overview.jpg?v=13";
 
 // Silent rapid-cut hero, assembled from the dedicated rapid camera clips.
 // Set to null to restore the task-episode mosaic.

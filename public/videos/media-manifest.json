@@ -3,11 +3,11 @@
   "videos": [
     {
       "id": "overview",
-      "source": "AW-0_Project_Film_v10_1080p.mp4",
+      "source": "AW-0_Project_Film_v13_1080p.mp4",
       "video": "/videos/overview.mp4",
       "poster": "/videos/posters/overview.jpg",
-      "durationSeconds": 457.37,
-      "bytes": 70796005
+      "durationSeconds": 547.87,
+      "bytes": 92332940
     },
     {
       "id": "arrange_fruits",
