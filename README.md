@@ -43,7 +43,7 @@ npm run build    # static export to ./out (output: "export" in next.config.ts)
 - `src/data/taskEpisodes.json` — code blocks and frame-aligned segments of the 8 task episodes (generated).
 - `src/app/page.tsx` — the article text and section order; `src/app/aw0.css` — AW-0 styles on top of the template's
   `globals.css`.
-- `src/components` — `Hero`, `JointDenoisingDemo`, `AnnotationPipeline`, `DemoGallery`, `SkillExplorer`, `Charts`, `FailureExplorer`,
+- `src/components` — `Hero`, `AnnotationPipeline`, `DemoGallery`, `SkillExplorer`, `Charts`, `FailureExplorer`,
   `CitationBibtex`, plus the template's `ZoomableImage` / `VideoPlayer` / `ExpandableVideoViewer`.
 - `public/figures` — WebP renders of the paper figures; `public/videos/episodes` — the 8 task episodes (H.264, 640x400).
 - `public/figures/annotation` — original embedded photos and agent logos from `code_label_pipeline_v2_0926.pdf`;
