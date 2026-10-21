@@ -377,16 +377,14 @@ function ArticleContent() {
           <VideoFigure
             caption={
               <>
-                Figure 5: <b>The annotation pipeline on a worked example.</b> A YAM blanket-folding demonstration is first
-                written as a structured program. The grasp–fold–release pattern it shares with dishcloth and trousers
-                folding becomes the skill <i>fold_edge_over</i>. With the 50-skill library frozen, a matching demonstration
-                reuses the cached program, and the annotated YAM and egocentric human demonstrations together form the
-                ≈3,000-hour pretraining corpus.
+                Figure 5: <b>Turning demonstrations into reusable skill programs.</b> Sampled subtasks are annotated with
+                code, and recurring behaviors are distilled into skills such as <i>fold_edge_over</i>. Cached programs are
+                then reused across robot and egocentric human videos when contact and motion evidence match.
               </>
             }
             id="annotation-example"
-            poster="/videos/posters/explainer_annotation_example.jpg"
-            src="/videos/explainers/annotation_example.mp4"
+            poster="/videos/posters/explainer_annotation_example_v2.jpg"
+            src="/videos/explainers/annotation_example_v2.mp4"
             title="Annotation pipeline worked example"
           />
           <p>
@@ -458,17 +456,14 @@ function ArticleContent() {
           <VideoFigure
             caption={
               <>
-                Figure 8: <b>Hybrid execution on RoboTwin 2.0.</b> A <i>blocks_ranking_rgb</i> rollout in a visually
-                randomized scene, played at 4× speed. By default the generated code only conditions the action chunk,
-                which drives the robot. In hybrid mode the code slice is checked at every replan: if it passes the stage,
-                dependency, and compile checks, it runs through the perception and control APIs; otherwise the action
-                chunk drives the robot. Across the 50 randomized tasks, hybrid execution raises success from 20.6% to
-                29.2%.
+                Figure 8: <b>Hybrid execution on RoboTwin 2.0.</b> At each replan, a code slice that passes validity and
+                progress checks executes through perception and control APIs; otherwise the action chunk drives the robot.
+                On the same <i>blocks_ranking_size</i> scene, hybrid execution succeeds while actions alone fail.
               </>
             }
             id="hybrid-execution-video"
-            poster="/videos/posters/explainer_hybrid_execution_robotwin.jpg"
-            src="/videos/explainers/hybrid_execution_robotwin.mp4"
+            poster="/videos/posters/explainer_hybrid_execution_robotwin_v2.jpg"
+            src="/videos/explainers/hybrid_execution_robotwin_v2.mp4"
             title="Hybrid execution on RoboTwin 2.0"
           />
 

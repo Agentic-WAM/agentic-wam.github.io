@@ -947,26 +947,27 @@
     },
     {
       "id": "explainer_annotation_example",
-      "source": "AW-0-X-Release-X-Post_2026-10-17/videos/03_Skill_Example.mp4",
-      "video": "/videos/explainers/annotation_example.mp4",
-      "poster": "/videos/posters/explainer_annotation_example.jpg",
+      "source": "x_post_4_video/output/x_post_4_annotation_feedback_v10.mp4",
+      "video": "/videos/explainers/annotation_example_v2.mp4",
+      "poster": "/videos/posters/explainer_annotation_example_v2.jpg",
       "durationSeconds": 55.0,
-      "bytes": 10419337,
+      "bytes": 13033143,
       "playerPlaybackRate": 1,
       "sourceCopiedWithoutReencoding": true,
-      "sha256": "a1e16ae1f7bd7a1d6a59b8bf0ce3e580207798354a54e48c4d49a214cd8bafcc",
-      "remuxedForFaststart": true
+      "sha256": "0558de79bfab8b1bcda380d8f6332a11282fd218fd19a91599b7fbd63b89b3c5",
+      "sourceUpdated": "2026-10-19"
     },
     {
       "id": "explainer_hybrid_execution_robotwin",
-      "source": "x_post_6_video/output/x_post_6_hybrid_execution.mp4",
-      "video": "/videos/explainers/hybrid_execution_robotwin.mp4",
-      "poster": "/videos/posters/explainer_hybrid_execution_robotwin.jpg",
-      "durationSeconds": 47.5,
-      "bytes": 5510749,
+      "source": "x_post_6_video/output/6_x_post_blocks_ranking_size_full_20261021.mp4",
+      "video": "/videos/explainers/hybrid_execution_robotwin_v2.mp4",
+      "poster": "/videos/posters/explainer_hybrid_execution_robotwin_v2.jpg",
+      "durationSeconds": 68.667,
+      "bytes": 12920034,
       "playerPlaybackRate": 1,
       "sourceCopiedWithoutReencoding": true,
-      "sha256": "0c8bddceb7d1ba2745abd8369334b1594973476c9082415f40e7177842a8a405"
+      "sha256": "a30784074225764032c4f1970876fab8aeb8f6a22890ca2e19f24929d12b227a",
+      "sourceUpdated": "2026-10-21"
     },
     {
       "id": "explainer_real_world_results",
