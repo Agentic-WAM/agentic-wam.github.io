@@ -5,7 +5,7 @@
 // Links. `null` renders the button as "coming soon" (not clickable).
 // ---------------------------------------------------------------------------
 export const LINKS = {
-  paper: null as string | null, // TODO: arXiv abs URL once the paper is posted
+  paper: "https://arxiv.org/abs/2610.30136",
   model: "https://huggingface.co/miniFranka/agentic-wam-pretrain-yamego3k-soup-e1",
   code: "https://github.com/ZhuoyangLiu2005/agentic-wam",
 };
