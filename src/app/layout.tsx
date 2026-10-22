@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono, Source_Serif_4 } from "next/font/google";
-import PasswordGate from "@/components/PasswordGate";
 import "./globals.css";
 import "./aw0.css";
 
@@ -25,8 +24,6 @@ export const metadata: Metadata = {
   icons: {
     icon: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/seo/favicon.svg`,
   },
-  // Keep the pre-release page out of search results while PasswordGate is on.
-  robots: { index: false, follow: false },
 };
 
 export default function RootLayout({
@@ -37,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${sourceSerif.variable} ${jetBrainsMono.variable} h-full antialiased`}>
       <body className={`${sourceSerif.className} min-h-full flex flex-col`}>
-        <PasswordGate>{children}</PasswordGate>
+        {children}
       </body>
     </html>
   );

@@ -7,7 +7,7 @@
 export const LINKS = {
   paper: null as string | null, // TODO: arXiv abs URL once the paper is posted
   model: "https://huggingface.co/miniFranka/agentic-wam-pretrain-yamego3k-soup-e1",
-  code: "https://github.com/Agentic-WAM/agentic-wam.github.io",
+  code: "https://github.com/ZhuoyangLiu2005/agentic-wam",
 };
 
 // BibTeX shown in the Citation section. Paste arXiv's exported entry here once
