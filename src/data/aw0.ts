@@ -12,7 +12,15 @@ export const LINKS = {
 
 // BibTeX shown in the Citation section. Paste arXiv's exported entry here once
 // the paper is posted; while it is null the Citation section is not rendered.
-export const BIBTEX: string | null = null;
+export const BIBTEX: string | null = `@misc{liu2026agenticworldactionmodels,
+  title={Agentic World Action Models},
+  author={Zhuoyang Liu and Dantong Niu and Botong Zhang and Boning Shao and Jing Wang and Ruijie Zheng and Yuvan Sharma and Runyu Lu and Jiaming Liu and Renrui Zhang and Roei Herzig and Yutong Bai and Ken Goldberg and Danfei Xu and Yuke Zhu and Guanzhi Wang and Linxi "Jim" Fan and Trevor Darrell},
+  year={2026},
+  eprint={2610.30136},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO},
+  url={https://arxiv.org/abs/2610.30136},
+}`;
 
 // Full project film, shown below the abstract with native playback controls.
 export const OVERVIEW_VIDEO = "/videos/overview.mp4?v=13";
